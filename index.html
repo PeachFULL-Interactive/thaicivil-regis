@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/Anakotmai/Anakotmai.css" rel="stylesheet" />
 
     <style>
         body {
@@ -15,6 +16,15 @@
             background-color: #f0f5fa; /* โทนสีพื้นหลังภาพอ้างอิง */
             color: #333;
         }
+h2 {
+font-family: 'Anakotmai', sans-serif;
+color: #374151;
+}
+
+p {
+font-family: 'Anakotmai', Medium;
+color: #374151;
+}
         
         /* ส่วนหัวของฟอร์ม */
         .page-header {
@@ -153,13 +163,13 @@
             
             <div class="page-header">
                 <h2>ระบบลงทะเบียนประชาชน</h2>
-                <p>กระทรวงมหาดไทย</p>
+                <p>PeachFullzZ's Thailand</p>
             </div>
 
             <div class="main-card row mx-0 d-flex flex-wrap">
                 
                 <div class="col-md-8 form-section bg-transparent">
-                    <h5 class="step-title">ขั้นตอนที่ 1: ข้อมูลส่วนตัว</h5>
+                    <h5 class="step-title">ข้อมูล</h5>
                     
                     <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
                         <div class="row g-3">
@@ -174,18 +184,18 @@
                             </div>
 
                             <div class="col-md-8">
-                                <label for="ชื่อและนามสกุล">ชื่อและนามสกุล</label>
-                                <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ-นามสกุล" class="form-control" required>
+                                <label for="ชื่อและนามสกุล">ชื่อ - นามสกุล</label>
+                                <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ - นามสกุลที่จะแสดงบทบาทสมมติ" class="form-control" required>
                             </div>
 
                             <div class="col-md-12">
                                 <label for="ศาสนา">ศาสนา</label>
-                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนา" class="form-control" required>
+                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนาจะแสดงบทบาทสมมติ" class="form-control" required>
                             </div>
 
                             <div class="col-md-12">
                                 <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อก</label>
-                                <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="Roblox Username" class="form-control" required>
+                                <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="ชื่อผู้ใช้โรบล็อก" class="form-control" required>
                             </div>
 
                             <div class="col-md-12">
@@ -212,9 +222,19 @@
 
                 <div class="col-md-4 steps-section">
                     <ul class="list-unstyled mb-0">
-                        <li class="step-item active">1. กรอกข้อมูล &gt;</li>
-                        <li class="step-item">2. ตรวจสอบข้อมูล &gt;</li>
-                        <li class="step-item">3. ยืนยัน</li>
+                        <li class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง
+
+The Bureau of Registration Administration</li>
+                        <li class="step-item">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
+
+
+อาศัยอำนาจกฎหมายที่เกี่ยวข้อง
+
+รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. ๒๕๖๔
+
+
+การดำเนินการดังกล่าวเป็นเพียงการแสดงบทบาทสมมติภายในเกม ไม่เกี่ยวข้องกับชีวิตจริง </li>
+                        <li class="step-item">โปรดอย่ากรอกข้อมูลส่วนตัวของผูัใช้งาน</li>
                     </ul>
                 </div>
 
@@ -246,11 +266,11 @@
             btn.disabled = false;
             btn.innerHTML = 'ลงทะเบียนสำเร็จ';
             
-            // ซ่อนข้อความหลังจาก 5 วินาที
+            // ซ่อนข้อความหลังจาก 1 วินาที
             setTimeout(() => { 
                 demo.style.display = 'none';
                 btn.innerHTML = 'ลงทะเบียน';
-            }, 5000);
+            }, 1000);
         })
         .catch(error => {
             console.error('Error!', error.message);
