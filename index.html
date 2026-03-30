@@ -13,7 +13,12 @@
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background: linear-gradient(135deg, #e2eef9 0%, #c4daef 100%);
+            /* เปลี่ยนพื้นหลังเป็นรูปภาพตามลิงก์ที่ให้มา */
+            background-image: url('https://media.discordapp.net/attachments/726041621912617000/1488128079825080512/20260330_174934.png?ex=69cba6c6&is=69ca5546&hm=04a0faeef68d75ac7b55463aa19cd62aa080114a02d4d59eb840dbe620d6a1be&=&format=webp&quality=lossless&width=1500&height=844');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             color: #000000;
             min-height: 100vh;
         }
@@ -23,8 +28,6 @@
             color: #374151;
         }
 
-
-        
         p {
             font-family: 'Anakotmai', sans-serif;
             font-weight: 500;
@@ -107,7 +110,7 @@
         /* --- กรอบข้อมูล --- */
         .form-section {
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.4); 
+            background-color: rgba(255, 255, 255, 0.7); /* ปรับความทึบแสงขึ้นเล็กน้อยเพื่อให้ตัวหนังสืออ่านง่ายขึ้นเมื่อมีรูปพื้นหลัง */
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-right: 1px solid rgba(255, 255, 255, 0.4);
@@ -116,7 +119,7 @@
         /* ส่วนคำอธิบายด้านขวา */
         .steps-section {
             padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.8); /* ปรับความทึบแสงขึ้นเล็กน้อย */
         }
 
         .step-item {
@@ -260,7 +263,7 @@
 
                             <div class="col-md-12">
                                 <label for="ศาสนา">ศาสนา</label>
-                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนาจะแสดงบทบาทสมมติ" class="form-control" required>
+                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนาที่จะนับถือในการแสดงบทบาทสมมติ" class="form-control" required>
                             </div>
 
                             <div class="col-md-12">
@@ -319,7 +322,7 @@
                 <h5 style="font-family: 'Anakotmai', Light; color: #000000; margin-bottom: 15px; font-size: 18px;">ประกาศข้อกำหนดการใช้งาน</h5>
                 
                <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Sarabun', sans-serif; font-weight: 400;">
-    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
+    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้มิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
     
     <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
     
