@@ -1,0 +1,177 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400&display=swap');
+
+label {
+font-family: 'Sarabun', sans-serif;
+        font-weight: 400;
+}
+
+
+        select#ประเภทบุคคล {
+width: 100%;
+height: 45px;
+padding: 0 16px;
+margin: 8px 0;
+border-radius: 8px;
+border: 1px solid rgba(0,0,0,.125);
+        font-size: 15px;
+font-family: 'Sarabun', sans-serif;
+        font-weight: 400;
+display: flex;
+justify-content: center;
+        }
+        
+input {
+width: 100%;
+height: 45px;
+padding: 0 16px;
+margin: 8px 0;
+border-radius: 8px;
+border: 1px solid rgba(0,0,0,.125);
+        font-size: 15px;
+font-family: 'Sarabun', sans-serif;
+        font-weight: 400;
+display: flex;
+justify-content: center;
+        }
+        
+        
+textarea {
+width: 100%;
+height: 95px;
+padding: 0 16px;
+margin: 8px 0;
+border-radius: 8px;
+border: 1px solid rgba(0,0,0,.125);
+        font-size: 15px;
+font-family: 'Sarabun', sans-serif;
+        font-weight: 400;
+display: flex;
+justify-content: center;
+        }
+        
+button.btn.btn-primary.mt-3 {
+width: 15%;
+height: 45px;
+margin: 12px 85%;
+border-radius: 24px;
+border: 1px solid #182e7a;
+        font-size: 15px;
+font-family: 'Sarabun', sans-serif;
+        font-weight: 400;
+background: rgb(18,72,146);
+background: linear-gradient(90deg, rgba(18,72,146,1) 0%, rgba(3,32,87,1) 100%);
+color: white;
+cursor: pointer;
+}
+
+b {
+font-family: 'IBM Plex Sans Thai', bold-700;
+        font-weight: 700;
+        color: blue;
+right: 3px;
+}
+
+</style>
+
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS: Bootstrap v-5.3 -->
+
+    
+     
+<body> 
+                <div class="py-lg-5 py-md-4 py-sm-3 py-2"></div>
+                <div class="row justify-content-center pt-0">
+                    <div class="col-lg-7 col-md-10">
+ 
+                        <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="ฐานข้อมูลทะเบียนราษฎร"> 
+                                                        <div class="col-12">
+                                    <div class="input_overlay">
+<label for="คำนำหน้า">คำนำหน้า</label>
+      <select name="คำนำหน้า" id="ประเภทบุคคล" class="form-control" required autocomplete="off">
+        <option value="ไม่ได้เลือก">เลือก...</option>
+        <option value="นาย">นาย</option>
+        <option value="นาง">นาง</option>
+        <option value="นางสาว">นางสาว</option>
+</select>
+
+                                    </div>
+                                    
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="input_overlay">
+                                        <label for="ชื่อและนามสกุล" class="lable">ชื่อและนามสกุล</label>
+                                        <input type="text" name="ชื่อและนามสกุล" placeholder="ชื่อนามสกุลที่จะแสดงบทบาทสมมติ" class="form-control" required autocomplete="off">
+                                    </div>
+                                </div>
+                            
+                                                        <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="input_overlay">
+                                        <label for="ศาสนา" class="lable">ศาสนา</label>
+                                        <input type="ศาสนา" name="ศาสนา" placeholder="ศาสนาที่จะแสดงบทบาทสมมติ" class="form-control" required autocomplete="off">
+                                    </div>
+                                </div>
+                                
+                                                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="input_overlay">
+                                        <label for="ชื่อผู้ใช้โรบล็อก" class="lable">ชื่อผู้ใช้โรบล็อก</label>
+                                        <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="ชื่อผู้ใช้โรบล็อก" class="form-control" required autocomplete="off">
+                                    </div>
+                                </div>
+                                
+                                                                                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="input_overlay">
+                                        <label for="ชื่อผู้ใช้ดิสคอร์ด" class="lable">ชื่อผู้ใช้ดิสคอร์ด</label>
+                                        <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น Nevti_chox
+#2896" class="form-control" required autocomplete="off">
+                                    </div>
+                                </div>
+                                
+                                
+                                                                                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="input_overlay">
+                                        <label for="ลิงก์บัญชี" class="lable">ลิงก์บัญชีโรบล็อก</label>
+                                        <input type="text" name="ลิงก์บัญชี" placeholder="ลิงก์บัญชีโรบล็อก" class="form-control" required autocomplete="off">
+                                    </div>
+                                </div>
+
+                                 
+                                <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary mt-3">ลงทะเบียน</button>
+                                </div>
+                                <p id="demo"></p>
+                            </div>
+                             
+                        </form>
+                    </div>
+                </div>
+ 
+ 
+    </main>
+ 
+ 
+     
+ 
+   <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzU3NpjW7jrishOMZb52X4hFriHfYSjD4xfncb0A2sZU-J-BFjicmuojqJFmE5rQujD/exec'
+            const form = document.forms ['ฐานข้อมูลทะเบียนราษฎร']
+            
+            
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b></div>",ฐานข้อมูลทะเบียนราษฎร.reset())
+                .catch(error => console.error('ผิดพลาด โปรดติดต่อผู้ดูแลระบบ', error.message))
+            })
+    </script>
+ <script>
+parent.document.getElementsByTagName('iframe')[0].scrolling="no";
+</script>
+              
+ </body>
+ </html>
