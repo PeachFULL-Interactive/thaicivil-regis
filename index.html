@@ -13,9 +13,8 @@
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            /* ใช้ Gradient CSS ล้วน ไม่มีรูปภาพ เพื่อให้เห็นเอฟเฟกต์เบลอตัดกับพื้นหลังชัดเจน */
             background: linear-gradient(135deg, #e2eef9 0%, #c4daef 100%);
-            color: #333;
+            color: #000000;
             min-height: 100vh;
         }
         
@@ -24,17 +23,19 @@
             color: #374151;
         }
 
+
+        
         p {
             font-family: 'Anakotmai', sans-serif;
             font-weight: 500;
             color: #374151;
         }
 
-        /* --- ส่วน Top Bar (เพิ่มความเบลอ) --- */
+        /* --- ส่วน Top Bar --- */
         .top-bar {
-            background-color: rgba(255, 255, 255, 0.5); /* สีขาวโปร่งแสง */
-            backdrop-filter: blur(10px); /* เอฟเฟกต์เบลอพื้นหลัง */
-            -webkit-backdrop-filter: blur(10px); /* สำหรับ Safari */
+            background-color: rgba(255, 255, 255, 0.5); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
             border-bottom: 1px solid rgba(255, 255, 255, 0.4);
             height: 60px;
             width: 100%;
@@ -49,15 +50,14 @@
             z-index: 1000;
         }
 
-        /* จัด Layout ของ Top Bar */
         .top-bar-left {
             display: flex;
             align-items: center;
-            gap: 15px; /* ระยะห่างระหว่างโลโก้กับข้อความ (ถ้ามี) */
+            gap: 15px; 
         }
 
         .top-bar .logo-container img {
-            height: 45px; /* ขนาดโลโก้ */
+            height: 45px; 
             width: auto;
         }
 
@@ -94,7 +94,7 @@
             font-size: 16px;
         }
 
-        /* กล่องคอนเทนเนอร์หลัก (ไม่มีรูปภาพแล้ว) */
+        /* กล่องคอนเทนเนอร์หลัก */
         .main-card {
             background-color: transparent; 
             border-radius: 16px;
@@ -104,11 +104,11 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        /* --- กรอบข้อมูล (เพิ่มความเบลอ) --- */
+        /* --- กรอบข้อมูล --- */
         .form-section {
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.4); /* สีขาวโปร่งแสง */
-            backdrop-filter: blur(12px); /* เอฟเฟกต์เบลอพื้นหลัง */
+            background-color: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-right: 1px solid rgba(255, 255, 255, 0.4);
         }
@@ -222,7 +222,7 @@
             <img src="image_7ad5c7.jpg" alt="โลโก้กรมการปกครอง">
         </div>
     </div>
-    <a href="#" class="help-link">
+    <a href="https://discord.com/channels/733872255544721459/923986317874982922" class="help-link">
         <i class="fa fa-question-circle-o"></i> ช่วยเหลือ
     </a>
 </div>
@@ -294,7 +294,7 @@
                     <ul class="list-unstyled mb-0">
                         <li class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง
 <br>The Bureau of Registration Administration</li>
-                        <li class="step-item">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
+                        <li class="step-item" style="font-size: 12px;">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
 <br><br>
 อาศัยอำนาจกฎหมายที่เกี่ยวข้อง<br>
 รัฐธรรมนูญแห่งราชอาณาจักรไทย พ.ศ. ๒๕๖๔
@@ -309,15 +309,61 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #dee2e6; padding: 20px 25px;">
+                <h4 class="modal-title" id="confirmModalLabel" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #374151;">ยืนยันการส่งข้อมูล</h4>
+            </div>
+            <div class="modal-body" style="padding: 25px;">
+                <h5 style="font-family: 'Anakotmai', Light; color: #000000; margin-bottom: 15px; font-size: 18px;">ประกาศข้อกำหนดการใช้งาน</h5>
+                
+               <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Sarabun', sans-serif; font-weight: 400;">
+    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
+    
+    <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
+    
+    <div style="margin-bottom: 0;">ทั้งนี้ ข้าพเจ้าได้ดำเนินการส่งคำขอเข้ากลุ่มบน 
+        <a href="https://www.roblox.com/communities/8278523/TH-Kingdom-of-Thailand#!/about" target="_blank" style="color: #2b74c2; text-decoration: none; font-weight: 600; transition: 0.3s;">
+            Roblox <i class="fa fa-external-link" style="font-size: 13px; margin-left: 2px;"></i>
+        </a> 
+        เป็นที่เรียบร้อยแล้ว
+</div>
+</div>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding: 15px 25px;">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="background-color: #f66d6d; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;">
+                    <i class="fa fa-times-circle" style="margin-right: 5px;"></i> ปิด
+                </button>
+                <button type="button" class="btn btn-success" id="confirmSubmitBtn" style="background-color: #2b74c2; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;">
+                    <i class="fa fa-check-circle" style="margin-right: 5px;"></i> ยืนยันส่งข้อมูล
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzU3NpjW7jrishOMZb52X4hFriHfYSjD4xfncb0A2sZU-J-BFjicmuojqJFmE5rQujD/exec';
     const form = document.forms['ฐานข้อมูลทะเบียนราษฎร'];
     const demo = document.getElementById("demo");
     const btn = document.getElementById("submitBtn");
+    
+    // ตั้งค่าตัวแปร Modal
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
 
     form.addEventListener('submit', e => {
-        e.preventDefault();
-        
+        e.preventDefault(); // ป้องกันการส่งแบบฟอร์มทันที
+        confirmModal.show(); // แสดงป๊อปอัพยืนยัน
+    });
+
+    // เมื่อกดยืนยันในป๊อปอัพ ให้ทำงานต่อ
+    confirmSubmitBtn.addEventListener('click', () => {
+        confirmModal.hide(); // ซ่อนป๊อปอัพ
+
         btn.disabled = true;
         btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังบันทึกข้อมูล...';
 
