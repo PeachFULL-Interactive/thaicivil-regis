@@ -5,59 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ลงทะเบียนฐานข้อมูลทะเบียนราษฎร</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #f4f7f6;
+            background-color: #f0f5fa; /* โทนสีพื้นหลังภาพอ้างอิง */
             color: #333;
         }
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-top: 50px;
-            margin-bottom: 50px;
+        
+        /* ส่วนหัวของฟอร์ม */
+        .page-header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            color: #123456;
         }
-        label {
-            font-weight: 600;
+        .page-header h2 {
+            font-weight: 700;
             margin-bottom: 5px;
-            display: block;
+            font-size: 28px;
         }
+        .page-header p {
+            font-weight: 400;
+            color: #4a6178;
+            font-size: 16px;
+        }
+
+        /* กล่องคอนเทนเนอร์หลัก */
+        .main-card {
+            background-color: #e8f2fa; /* สีฟ้าอ่อนตามภาพ */
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 50px;
+            border: 1px solid #d1e3f3;
+        }
+
+        .form-section {
+            padding: 40px;
+        }
+
+        .steps-section {
+            padding: 40px 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 1px solid #dbe9f5;
+        }
+
+        .step-item {
+            font-size: 15px;
+            margin-bottom: 15px;
+            color: #5c7792;
+        }
+        .step-item.active {
+            color: #123456;
+            font-weight: 600;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a2b3c;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
         .form-control, .form-select {
             border-radius: 8px;
             padding: 10px 15px;
-            border: 1px solid #ced4da;
+            border: 1px solid #c2d1e0;
+            background-color: #ffffff;
+            font-size: 15px;
         }
-        /* ปรับแต่งปุ่มให้ Flex และ Responsive */
+        .form-control:focus, .form-select:focus {
+            border-color: #2b74c2;
+            box-shadow: 0 0 0 0.2rem rgba(43, 116, 194, 0.25);
+        }
+
+        /* ปรับแต่งปุ่มให้ตรงตาม Reference */
+        .btn-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
         .btn-submit {
-            background: linear-gradient(90deg, #124892 0%, #032057 100%);
+            background-color: #2b74c2;
             color: white;
             border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-size: 16px;
+            border-radius: 8px;
+            padding: 10px 35px;
+            font-size: 15px;
+            font-weight: 500;
             transition: 0.3s;
-            width: 100%; /* เต็มจอในมือถือ */
-        }
-        @media (min-width: 768px) {
-            .btn-submit {
-                width: auto; /* ขนาดพอดีคำในคอม */
-                float: right;
-            }
         }
         .btn-submit:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+            background-color: #1e5a99;
             color: white;
         }
+        .btn-cancel {
+            background-color: #ced4da;
+            color: #495057;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 35px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .btn-cancel:hover {
+            background-color: #b1b8be;
+            color: #212529;
+        }
+
         .alert-custom {
             display: none;
             margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .steps-section {
+                border-left: none;
+                border-top: 1px solid #dbe9f5;
+            }
+            .btn-actions {
+                flex-direction: column;
+            }
+            .btn-submit, .btn-cancel {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -65,61 +149,76 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-            <div class="form-container">
-                <h3 class="text-center mb-4" style="color: #124892;">ลงทะเบียนฐานข้อมูล</h3>
-                
-                <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
-                    
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label for="คำนำหน้า">คำนำหน้า</label>
-                            <select name="คำนำหน้า" class="form-select" required>
-                                <option value="">เลือก...</option>
-                                <option value="นาย">นาย</option>
-                                <option value="นาง">นาง</option>
-                                <option value="นางสาว">นางสาว</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-8">
-                            <label for="ชื่อและนามสกุล">ชื่อและนามสกุล</label>
-                            <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ-นามสกุล" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ศาสนา">ศาสนา</label>
-                            <input type="text" name="ศาสนา" placeholder="กรอกศาสนา" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อก</label>
-                            <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="Roblox Username" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ชื่อผู้ใช้ดิสคอร์ด">ชื่อผู้ใช้ดิสคอร์ด</label>
-                            <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น Nevti_chox#2896" class="form-control" required>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ลิงก์บัญชี">ลิงก์บัญชีโรบล็อก</label>
-                            <input type="url" name="ลิงก์บัญชี" placeholder="https://www.roblox.com/users/..." class="form-control" required>
-                        </div>
-
-                        <div class="col-12 mt-4">
-                            <button type="submit" id="submitBtn" class="btn btn-submit">
-                                <i class="fa fa-paper-plane me-2"></i> ลงทะเบียน
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <div id="demo" class="alert alert-primary alert-custom text-center" role="alert">
-                    <b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b>
-                </div>
+        <div class="col-lg-9 col-md-11">
+            
+            <div class="page-header">
+                <h2>ระบบลงทะเบียนประชาชน</h2>
+                <p>กระทรวงมหาดไทย</p>
             </div>
-        </div>
+
+            <div class="main-card row mx-0 d-flex flex-wrap">
+                
+                <div class="col-md-8 form-section bg-transparent">
+                    <h5 class="step-title">ขั้นตอนที่ 1: ข้อมูลส่วนตัว</h5>
+                    
+                    <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="คำนำหน้า">คำนำหน้า</label>
+                                <select name="คำนำหน้า" class="form-select" required>
+                                    <option value="">เลือก...</option>
+                                    <option value="นาย">นาย</option>
+                                    <option value="นาง">นาง</option>
+                                    <option value="นางสาว">นางสาว</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="ชื่อและนามสกุล">ชื่อและนามสกุล</label>
+                                <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ-นามสกุล" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="ศาสนา">ศาสนา</label>
+                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนา" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อก</label>
+                                <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="Roblox Username" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="ชื่อผู้ใช้ดิสคอร์ด">ชื่อผู้ใช้ดิสคอร์ด</label>
+                                <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น Nevti_chox#2896" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="ลิงก์บัญชี">ลิงก์บัญชีโรบล็อก</label>
+                                <input type="url" name="ลิงก์บัญชี" placeholder="https://www.roblox.com/users/..." class="form-control" required>
+                            </div>
+
+                            <div class="col-12 btn-actions">
+                                <button type="submit" id="submitBtn" class="btn btn-submit">ลงทะเบียน</button>
+                                <button type="button" class="btn btn-cancel" onclick="document.getElementById('regForm').reset();">ยกเลิก</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="demo" class="alert alert-primary alert-custom text-center" role="alert">
+                        <b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b>
+                    </div>
+                </div>
+
+                <div class="col-md-4 steps-section">
+                    <ul class="list-unstyled mb-0">
+                        <li class="step-item active">1. กรอกข้อมูล &gt;</li>
+                        <li class="step-item">2. ตรวจสอบข้อมูล &gt;</li>
+                        <li class="step-item">3. ยืนยัน</li>
+                    </ul>
+                </div>
+
+            </div> </div>
     </div>
 </div>
 
@@ -134,7 +233,7 @@
         
         // ปรับแต่งปุ่มขณะกำลังส่ง
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> กำลังบันทึกข้อมูล...';
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังบันทึกข้อมูล...';
 
         fetch(scriptURL, { 
             method: 'POST', 
@@ -145,12 +244,12 @@
             demo.style.display = 'block'; // แสดงข้อความสำเร็จ
             form.reset(); // ล้างข้อมูลในฟอร์ม
             btn.disabled = false;
-            btn.innerHTML = '<i class="fa fa-paper-plane me-2"></i> ลงทะเบียนสำเร็จ';
+            btn.innerHTML = 'ลงทะเบียนสำเร็จ';
             
             // ซ่อนข้อความหลังจาก 5 วินาที
             setTimeout(() => { 
                 demo.style.display = 'none';
-                btn.innerHTML = '<i class="fa fa-paper-plane me-2"></i> ลงทะเบียน';
+                btn.innerHTML = 'ลงทะเบียน';
             }, 5000);
         })
         .catch(error => {
