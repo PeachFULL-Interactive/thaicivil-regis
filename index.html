@@ -13,13 +13,11 @@
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            /* เปลี่ยนพื้นหลังเป็นรูปภาพตามลิงก์ที่ให้มา */
-            background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489028173034164245/utilities-need-digital-transformation.png?ex=69ceed0d&is=69cd9b8d&hm=46eed785f4650d1df1973b78e19f9aa0c4c0d232383f9f9be85d7c6f8f6c9fa5');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            color: #000000;
+            background-color: #f6f6f6;
             min-height: 100vh;
         }
         
@@ -33,7 +31,7 @@
             color: #000000;
         }
         
-bu {
+        bu {
             font-family: 'Anakotmai', sans-serif;
             color: #000000;
         }
@@ -46,11 +44,10 @@ bu {
 
         /* --- ส่วน Top Bar --- */
         .top-bar {
-            background-color: rgba(255, 255, 255, 0.5); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            height: 60px;
+            background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489031163526905906/bg.BspPQHI7.webp?ex=69ceefd6&is=69cd9e56&hm=d49ffa297a32c81ac0152c78b5915b3581fe0c0469c509ece19170e06f76618e&');
+            background-size: cover;
+            background-position: center;
+            height: 100px;
             width: 100%;
             position: fixed;
             top: 0;
@@ -58,8 +55,8 @@ bu {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            padding: 0 12%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 1000;
         }
 
@@ -69,13 +66,21 @@ bu {
             gap: 15px; 
         }
 
-        .top-bar .logo-container img {
-            height: 45px; 
+        /* ข้อความใหม่บน Top Bar */
+        .top-bar-text {
+            font-family: 'Anakotmai', sans-serif;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .top-bar-left .logo-container img {
+            height: 60px;
             width: auto;
         }
 
         .top-bar .help-link {
-            color: #5c7792;
+            color: white; /* เปลี่ยนเป็นสีขาวเพื่อให้อ่านง่ายขึ้นบนพื้นหลังสีน้ำเงิน */
             text-decoration: none;
             font-size: 15px;
             font-weight: 500;
@@ -86,13 +91,13 @@ bu {
         }
 
         .top-bar .help-link:hover {
-            color: #2b74c2;
+            color: #e2e8f0;
         }
 
         /* ส่วนหัวของฟอร์ม */
         .page-header {
             text-align: center;
-            margin-top: 120px;
+            margin-top: 150px;
             margin-bottom: 30px;
             color: #123456;
         }
@@ -120,7 +125,7 @@ bu {
         /* --- กรอบข้อมูล --- */
         .form-section {
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.7); /* ปรับความทึบแสงขึ้นเล็กน้อยเพื่อให้ตัวหนังสืออ่านง่ายขึ้นเมื่อมีรูปพื้นหลัง */
+            background-color: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-right: 1px solid rgba(255, 255, 255, 0.4);
@@ -129,7 +134,7 @@ bu {
         /* ส่วนคำอธิบายด้านขวา */
         .steps-section {
             padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.8); /* ปรับความทึบแสงขึ้นเล็กน้อย */
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         .step-item {
@@ -222,7 +227,7 @@ bu {
                 width: 100%;
             }
             .top-bar {
-                padding: 0 15px;
+                padding: 0 20px;
             }
         }
     </style>
@@ -231,9 +236,7 @@ bu {
 
 <div class="top-bar">
     <div class="top-bar-left">
-        <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/330px-Flag_of_Thailand.svg.png" alt="สัญลักษณ์">
-        </div>
+        <span class="top-bar-text">ระบบลงทะเบียนประชาชนไทย</span>
     </div>
     <a href="https://discord.com/channels/733872255544721459/923986317874982922" class="help-link">
         <i class="fa fa-question-circle-o"></i> ช่วยเหลือ
@@ -337,7 +340,7 @@ bu {
         <img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;">
     </div>
 
-    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้มิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
+    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
     
     <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านบางส่วนในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
     
