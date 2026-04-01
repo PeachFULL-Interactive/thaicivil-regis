@@ -13,6 +13,8 @@
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
+            /* เพิ่มพื้นหลังของเว็บไซต์ */
+            background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69cef1ac&is=69cda02c&hm=54ac2b0fac31a7be509c93ba00d6cb0b76914470fd9638b0ff9d38fbd4cc7261&');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -21,32 +23,19 @@
             min-height: 100vh;
         }
         
-        h2 {
+        h2, h5, bu, p {
             font-family: 'Anakotmai', sans-serif;
-            color: #374151;
         }
-        
-        h5 {
-            font-family: 'Anakotmai', sans-serif;
-            color: #000000;
-        }
-        
-        bu {
-            font-family: 'Anakotmai', sans-serif;
-            color: #000000;
-        }
-        
-        p {
-            font-family: 'Anakotmai', sans-serif;
-            font-weight: 500;
-            color: #374151;
-        }
+        h2 { color: #374151; }
+        h5, bu { color: #000000; }
+        p { font-weight: 500; color: #374151; }
 
         /* --- ส่วน Top Bar --- */
         .top-bar {
-            background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489031163526905906/bg.BspPQHI7.webp?ex=69ceefd6&is=69cd9e56&hm=d49ffa297a32c81ac0152c78b5915b3581fe0c0469c509ece19170e06f76618e&');
-            background-size: cover;
-            background-position: center;
+            /* ลบ background-image ออก และใส่สีโปร่งแสงพร้อมเบลอ */
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             height: 100px;
             width: 100%;
             position: fixed;
@@ -56,7 +45,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 12%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             z-index: 1000;
         }
 
@@ -66,12 +55,15 @@
             gap: 15px; 
         }
 
-        /* ข้อความใหม่บน Top Bar */
+        /* ข้อความใหม่บน Top Bar แบบ Gradient */
         .top-bar-text {
             font-family: 'Anakotmai', sans-serif;
-            color: white;
             font-size: 20px;
             font-weight: 700;
+            background: linear-gradient(90deg, rgba(18,72,146,1) 0%, rgba(3,32,87,1) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .top-bar-left .logo-container img {
@@ -80,10 +72,10 @@
         }
 
         .top-bar .help-link {
-            color: white; /* เปลี่ยนเป็นสีขาวเพื่อให้อ่านง่ายขึ้นบนพื้นหลังสีน้ำเงิน */
+            color: #124892; /* เปลี่ยนสีให้อ่านง่ายบนพื้นหลังสว่าง/เบลอ */
             text-decoration: none;
             font-size: 15px;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -91,7 +83,7 @@
         }
 
         .top-bar .help-link:hover {
-            color: #e2e8f0;
+            color: #032057;
         }
 
         /* ส่วนหัวของฟอร์ม */
@@ -181,17 +173,17 @@
             margin-top: 20px;
         }
         .btn-submit {
-            background-color: #2b74c2;
+            background: linear-gradient(90deg, rgba(18,72,146,1) 0%, rgba(3,32,87,1) 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 24px; /* ปรับมุมโค้งตามความต้องการ */
             padding: 10px 35px;
             font-size: 15px;
             font-weight: 500;
             transition: 0.3s;
         }
         .btn-submit:hover {
-            background-color: #1e5a99;
+            opacity: 0.85; /* ใช้ Opacity แทนการเปลี่ยนสีพื้นหลัง เพื่อรักษา Gradient */
             color: white;
         }
         .btn-cancel {
