@@ -11,16 +11,14 @@
     <link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/Anakotmai/Anakotmai.css" rel="stylesheet" />
 
     <style>
+        /* --- ตั้งค่าเริ่มต้น --- */
         body {
             font-family: 'Google Sans', sans-serif;
             font-weight: 400;
-            background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69cef1ac&is=69cda02c&hm=54ac2b0fac31a7be509c93ba00d6cb0b76914470fd9638b0ff9d38fbd4cc7261&');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
             background-color: #f6f6f6;
-            min-height: 100vh;
+            /* ลบ Background-image ออกจาก Body เพื่อแยก Section อย่างอิสระ */
         }
         
         h2, h5, bu, p {
@@ -32,9 +30,10 @@
 
         /* --- ส่วน Top Bar --- */
         .top-bar {
-            background-color: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.8);
+            background-image: none !important;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             height: 100px;
             width: 100%;
             position: fixed;
@@ -84,14 +83,23 @@
             color: #032057;
         }
 
-        /* --- ส่วนภาพหน้าปก (Hero Cover) --- */
-        .hero-cover {
+        /* =========================================
+           Section 1: ส่วนภาพหน้าปก (Hero Banner) 
+           ========================================= */
+        .section-hero-wrapper {
+            background-color: #ffffff; /* พื้นหลังสีขาวล้วน */
             width: 100%;
-            max-width: 2898px; /* ป้องกันไม่ให้ภาพขยายเกินขนาดจริงบนหน้าจอที่กว้างมากๆ */
-            aspect-ratio: 2898 / 906; /* กำหนดสัดส่วนตามขนาดภาพจริง */
-            margin-top: 130px; /* ดันลงมาให้พ้น Top Bar และเว้นระยะห่าง */
-            margin-left: auto;
-            margin-right: auto;
+            padding-top: 140px; /* ดันลงมาพ้น Top Bar */
+            padding-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-cover {
+            width: 90%; 
+            max-width: 1280px; /* จำกัดความกว้างให้ภาพไม่แตกบนจอใหญ่ */
+            aspect-ratio: 16 / 9; /* บังคับสัดส่วน 16:9 */
             background-image: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/20260404_153941.jpg?raw=true');
             background-size: cover;
             background-position: center;
@@ -100,17 +108,17 @@
             align-items: flex-end;
             justify-content: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 16px; /* เพิ่มความมนให้ขอบรูปเล็กน้อยเพื่อความสวยงาม */
         }
 
-        /* ปุ่มเลื่อนลง */
         .scroll-down-btn {
             position: absolute;
-            bottom: 5%; 
+            bottom: -25px; /* ให้อยู่กึ่งกลางขอบล่างของภาพ */
             color: #ffffff;
             font-size: 30px; 
             text-decoration: none;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(18, 72, 146, 0.9);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -119,12 +127,11 @@
             justify-content: center;
             animation: bounce 2s infinite;
             transition: background 0.3s, transform 0.3s;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .scroll-down-btn:hover {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(3, 32, 87, 1);
             color: #ffffff;
             transform: scale(1.05);
         }
@@ -135,14 +142,26 @@
             60% { transform: translateY(-7px); }
         }
 
-        /* ส่วนหัวของฟอร์ม */
+        /* =========================================
+           Section 2: ส่วนของ Interface ฟอร์มกรอกข้อมูล
+           ========================================= */
+        .section-form-wrapper {
+            background-image: url('https://media.discordapp.net/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69d194ac&is=69d0432c&hm=4c7becacdfa3cd39d39a971ecca0ed865c42d7101542ecb8872945efeda46996&=&format=webp&width=1872&height=695');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 50px;
+            padding-bottom: 80px;
+        }
+
         #registration-section {
             scroll-margin-top: 120px; 
         }
 
         .page-header {
             text-align: center;
-            margin-top: 60px;
             margin-bottom: 30px;
             color: #123456;
         }
@@ -157,29 +176,26 @@
             font-size: 16px;
         }
 
-        /* กล่องคอนเทนเนอร์หลัก */
         .main-card {
             background-color: transparent; 
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.08);
             overflow: hidden;
             margin-bottom: 50px;
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        /* --- กรอบข้อมูล --- */
         .form-section {
             padding: 40px;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px);
             border-right: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        /* ส่วนคำอธิบายด้านขวา */
         .steps-section {
             padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.95);
         }
 
         .step-item {
@@ -206,11 +222,15 @@
             color: #2c3e50;
         }
 
+        /* ปรับปรุง Input ให้มีการเบลอ 4px และไม่มีภาพพื้นหลัง */
         .form-control, .form-select {
             border-radius: 8px;
             padding: 10px 15px;
             border: 1px solid rgba(194, 209, 224, 0.8);
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.6);
+            background-image: none !important;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             font-size: 15px;
             transition: all 0.3s;
         }
@@ -274,11 +294,8 @@
             .top-bar {
                 padding: 0 20px;
             }
-            .scroll-down-btn {
-                bottom: 15px;
-            }
-            .hero-cover {
-                margin-top: 115px; /* ปรับระยะบนมือถือ */
+            .section-hero-wrapper {
+                padding-top: 120px;
             }
         }
     </style>
@@ -296,93 +313,97 @@
     </a>
 </div>
 
-<div class="hero-cover">
-    <a href="#registration-section" class="scroll-down-btn" title="เลื่อนลงเพื่อลงทะเบียน">
-        <i class="fa fa-angle-down"></i>
-    </a>
-</div>
+<section class="section-hero-wrapper">
+    <div class="hero-cover">
+        <a href="#registration-section" class="scroll-down-btn" title="เลื่อนลงเพื่อลงทะเบียน">
+            <i class="fa fa-angle-down"></i>
+        </a>
+    </div>
+</section>
 
-<div class="container" id="registration-section">
-    <div class="row justify-content-center">
-        <div class="col-lg-9 col-md-11">
-            
-            <div class="page-header">
-                <h2>ระบบลงทะเบียนประชาชน</h2>
-                <p>PeachFullzZ's Thailand</p>
-            </div>
-
-            <div class="main-card row mx-0 d-flex flex-wrap">
+<section class="section-form-wrapper">
+    <div class="container" id="registration-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-11">
                 
-                <div class="col-md-8 form-section">
-                    <h5 class="step-title">ข้อมูล</h5>
-                    
-                    <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label for="คำนำหน้า">คำนำหน้า</label>
-                                <select name="คำนำหน้า" class="form-select" required>
-                                    <option value="">เลือก...</option>
-                                    <option value="นาย">นาย</option>
-                                    <option value="นาง">นาง</option>
-                                    <option value="นางสาว">นางสาว</option>
-                                </select>
-                            </div>
-
-                            <div class="col-md-8">
-                                <label for="ชื่อและนามสกุล">ชื่อ - นามสกุล</label>
-                                <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ - นามสกุลที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="ศาสนา">ศาสนา</label>
-                                <input type="text" name="ศาสนา" placeholder="กรอกศาสนาที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อกซ์</label>
-                                <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="เช่น @PeachFullzZ" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="ชื่อผู้ใช้ดิสคอร์ด">ชื่อผู้ใช้ดิสคอร์ด</label>
-                                <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น peachfullzz" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="ลิงก์บัญชี">ลิงก์บัญชีโรบล็อก</label>
-                                <input type="url" name="ลิงก์บัญชี" placeholder="https://www.roblox.com/users/..." class="form-control" required>
-                            </div>
-
-                            <div class="col-12 btn-actions">
-                                <button type="submit" id="submitBtn" class="btn btn-submit">ลงทะเบียน</button>
-                                <button type="button" class="btn btn-cancel" onclick="document.getElementById('regForm').reset();">ยกเลิก</button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <div id="demo" class="alert alert-primary alert-custom text-center" role="alert">
-                        <b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b>
-                    </div>
+                <div class="page-header">
+                    <h2>ระบบลงทะเบียนประชาชน</h2>
+                    <p>PeachFullzZ's Thailand</p>
                 </div>
 
-                <div class="col-md-4 steps-section">
-                    <ul class="list-unstyled mb-0">
-                        <bu class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง
+                <div class="main-card row mx-0 d-flex flex-wrap">
+                    
+                    <div class="col-md-8 form-section">
+                        <h5 class="step-title">ข้อมูล</h5>
+                        
+                        <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="คำนำหน้า">คำนำหน้า</label>
+                                    <select name="คำนำหน้า" class="form-select" required>
+                                        <option value="">เลือก...</option>
+                                        <option value="นาย">นาย</option>
+                                        <option value="นาง">นาง</option>
+                                        <option value="นางสาว">นางสาว</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <label for="ชื่อและนามสกุล">ชื่อ - นามสกุล</label>
+                                    <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ - นามสกุลที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="ศาสนา">ศาสนา</label>
+                                    <input type="text" name="ศาสนา" placeholder="กรอกศาสนาที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อกซ์</label>
+                                    <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="เช่น @PeachFullzZ" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="ชื่อผู้ใช้ดิสคอร์ด">ชื่อผู้ใช้ดิสคอร์ด</label>
+                                    <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น peachfullzz" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="ลิงก์บัญชี">ลิงก์บัญชีโรบล็อก</label>
+                                    <input type="url" name="ลิงก์บัญชี" placeholder="https://www.roblox.com/users/..." class="form-control" required>
+                                </div>
+
+                                <div class="col-12 btn-actions">
+                                    <button type="submit" id="submitBtn" class="btn btn-submit">ลงทะเบียน</button>
+                                    <button type="button" class="btn btn-cancel" onclick="document.getElementById('regForm').reset();">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div id="demo" class="alert alert-primary alert-custom text-center" role="alert">
+                            <b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 steps-section">
+                        <ul class="list-unstyled mb-0">
+                            <bu class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง
 <br>The Bureau of Registration Administration</bu>
-                        <li class="step-item" style="font-size: 12px;">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
+                            <li class="step-item" style="font-size: 12px;">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
 <br><br>
 อาศัยอำนาจกฎหมายที่เกี่ยวข้อง<br>
 รัฐธรรมนูญแห่งราชอาณาจักรไทย
 <br><br>
 การดำเนินการดังกล่าวเป็นเพียงการแสดงบทบาทสมมติภายในเกม ไม่เกี่ยวข้องกับชีวิตจริง </li>
-                        <li class="step-item">โปรดอย่ากรอกข้อมูลส่วนตัวของผู้ใช้งาน</li>
-                    </ul>
-                </div>
+                            <li class="step-item">โปรดอย่ากรอกข้อมูลส่วนตัวของผู้ใช้งาน</li>
+                        </ul>
+                    </div>
 
-            </div> 
+                </div> 
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
