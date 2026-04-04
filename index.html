@@ -499,93 +499,106 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-   // ==========================================
-// 1. ตั้งค่า URL และตัวแปรฟอร์ม
-// ==========================================
-// ⚠️ สำคัญมาก 1: นำ URL Web App อันใหม่ที่ได้จากการ Deploy มาใส่ที่นี่
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzU3NpjW7jrishOMZb52X4hFriHfYSjD4xfncb0A2sZU-J-BFjicmuojqJFmE5rQujD/exec'; 
+    // ==========================================
+    // 1. ตั้งค่า URL และประกาศตัวแปร
+    // ==========================================
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzU3NpjW7jrishOMZb52X4hFriHfYSjD4xfncb0A2sZU-J-BFjicmuojqJFmE5rQujD/exec'; 
 
-// (สมมติว่าคุณมีตัวแปรเหล่านี้อยู่แล้ว อ้างอิงตามโค้ดเดิมของคุณ)
-// const form = document.forms['ชื่อฟอร์ม'];
-// const btn = document.getElementById('ปุ่มsubmit');
-// const confirmModal = ...
-// const confirmSubmitBtn = ...
-// const demo = ...
+    // เชื่อมต่อตัวแปรกับ ID ในหน้า HTML
+    const form = document.getElementById('regForm');
+    const btn = document.getElementById('submitBtn');
+    const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
+    const demo = document.getElementById('demo');
 
-// ==========================================
-// 2. ระบบส่งข้อมูลและตรวจสอบเมื่อกดปุ่มยืนยัน
-// ==========================================
-confirmSubmitBtn.addEventListener('click', async () => {
-    
-    // ซ่อน Modal (ถ้ามี) และเปลี่ยนสถานะปุ่มเพื่อแสดงว่ากำลังโหลด
-    if (typeof confirmModal !== 'undefined') confirmModal.hide(); 
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังตรวจสอบและบันทึกข้อมูล...';
+    // เรียกใช้งาน Bootstrap Modal เพื่อให้เปิด/ปิดผ่านโค้ดได้
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
 
-    try {
-        // ดึงข้อมูลทั้งหมดจากฟอร์ม
-        let formData = new FormData(form);
+    // ==========================================
+    // 2. ดักจับการกดปุ่ม "ลงทะเบียน" ในหน้าแรก (เพื่อเปิด Modal)
+    // ==========================================
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // ป้องกันไม่ให้หน้าเว็บรีเฟรชเอง
+        confirmModal.show(); // เปิดหน้าต่างประกาศข้อกำหนด
+    });
+
+    // ==========================================
+    // 3. ฟังก์ชันสำหรับ Turnstile CAPTCHA (ปลดล็อกปุ่มเมื่อติ๊กถูก)
+    // ==========================================
+    function enableSubmitBtn() {
+        confirmSubmitBtn.disabled = false; // ปลดล็อกปุ่ม "ยืนยันส่งข้อมูล"
+    }
+
+    // ==========================================
+    // 4. ระบบส่งข้อมูลจริง เมื่อกดปุ่ม "ยืนยันส่งข้อมูล" ใน Modal
+    // ==========================================
+    confirmSubmitBtn.addEventListener('click', async () => {
         
-        // --- ด่านที่ 1: ตรวจสอบการกด CAPTCHA ของผู้ใช้ ---
-        if (typeof turnstile !== 'undefined') {
-            const turnstileResponse = turnstile.getResponse();
-            if (!turnstileResponse) {
-                alert('❌ กรุณายืนยันตัวตนว่าคุณไม่ใช่บอท (ติ๊กถูกที่ CAPTCHA)');
-                btn.disabled = false;
-                btn.innerHTML = 'ลองใหม่อีกครั้ง';
-                return; // หยุดการทำงานทันทีถ้าไม่ได้กด
-            }
-            formData.append('cf-turnstile-response', turnstileResponse);
-        }
+        // 1. ปิดหน้าต่าง Modal
+        confirmModal.hide(); 
+        
+        // 2. เปลี่ยนข้อความปุ่มลงทะเบียนเป็นไอคอนโหลด
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังตรวจสอบและบันทึกข้อมูล...';
 
-        // --- ด่านที่ 2: แนบรหัสผ่านลับ (Secret Key) ---
-        // ⚠️ สำคัญมาก 2: ต้องเปลี่ยนรหัสตรงนี้ ให้ตรงกับบรรทัดที่ 9 ใน Google Apps Script
-        formData.append('secret_key', 'ThaiNBCpressLove3PunPun2565'); 
-
-        // --- ด่านที่ 3: ส่งข้อมูลไปให้ Google Apps Script ตรวจสอบ Roblox และบันทึก ---
-        const response = await fetch(scriptURL, { 
-            method: 'POST', 
-            body: formData
-        });
-
-        // --- ด่านที่ 4: อ่านผลลัพธ์ที่ตอบกลับมาจากหลังบ้าน ---
-        const result = await response.json();
-
-        // เช็กว่าระบบหลังบ้านทำงาน "สำเร็จ" หรือไม่
-        if (result.result === 'success') {
-            console.log('Success!', result);
-            demo.style.display = 'block'; // แสดงข้อความสำเร็จ
-            form.reset(); // ล้างข้อมูลในฟอร์มให้ว่าง
+        try {
+            let formData = new FormData(form);
             
-            // รีเซ็ต CAPTCHA เตรียมพร้อมสำหรับคนต่อไป
-            if (typeof turnstile !== 'undefined') turnstile.reset(); 
+            // --- ด่านที่ 1: ตรวจสอบการกด CAPTCHA ---
+            if (typeof turnstile !== 'undefined') {
+                const turnstileResponse = turnstile.getResponse();
+                if (!turnstileResponse) {
+                    alert('❌ กรุณายืนยันตัวตนว่าคุณไม่ใช่บอท');
+                    btn.disabled = false;
+                    btn.innerHTML = 'ลงทะเบียน';
+                    return; 
+                }
+                formData.append('cf-turnstile-response', turnstileResponse);
+            }
+
+            // --- ด่านที่ 2: แนบรหัสผ่านลับ ---
+            formData.append('0x4AAAAAAC0krUH8kzLKUjiAShDS-n0O_Qg', 'ThaiNBCpressLove3PunPun2565'); 
+
+            // --- ด่านที่ 3: ส่งข้อมูลไป Google Apps Script ---
+            const response = await fetch(scriptURL, { 
+                method: 'POST', 
+                body: formData
+            });
+
+            const result = await response.json();
+
+            // --- ด่านที่ 4: ตรวจสอบผลลัพธ์ ---
+            if (result.result === 'success') {
+                demo.style.display = 'block'; // แสดงข้อความสำเร็จ
+                form.reset(); // ล้างข้อมูล
+                
+                // รีเซ็ต CAPTCHA และล็อกปุ่มยืนยันกลับคืน
+                if (typeof turnstile !== 'undefined') turnstile.reset(); 
+                confirmSubmitBtn.disabled = true; 
+                
+                btn.disabled = false;
+                btn.innerHTML = 'ลงทะเบียนสำเร็จ';
+                
+                setTimeout(() => { 
+                    demo.style.display = 'none';
+                    btn.innerHTML = 'ลงทะเบียน';
+                }, 5000);
+
+            } else {
+                throw new Error(result.error);
+            }
+
+        } catch (error) {
+            // หากเกิดข้อผิดพลาด (เช่น ชื่อซ้ำ, ลิงก์โรบล็อกผิด)
+            alert('❌ ไม่สามารถบันทึกข้อมูลได้:\n\n' + error.message); 
             
             btn.disabled = false;
-            btn.innerHTML = 'ลงทะเบียนสำเร็จ';
+            btn.innerHTML = 'ลงทะเบียน';
             
-            setTimeout(() => { 
-                demo.style.display = 'none';
-                btn.innerHTML = 'ลงทะเบียน';
-            }, 5000);
-
-        } else {
-            // หากหลังบ้านพบข้อผิดพลาด (เช่น ชื่อซ้ำ, ลิงก์ผิด, หาชื่อ Roblox ไม่เจอ) จะโยนเข้า Catch ทันที
-            throw new Error(result.error);
+            // รีเซ็ต CAPTCHA และล็อกปุ่มยืนยันกลับคืนเพื่อให้กดยืนยันตัวตนใหม่
+            if (typeof turnstile !== 'undefined') turnstile.reset(); 
+            confirmSubmitBtn.disabled = true; 
         }
-
-    } catch (error) {
-        console.error('Error!', error.message);
-        
-        // ❌ แสดงข้อความ Error ที่ส่งมาจาก Google Apps Script ให้ผู้ใช้เห็นชัดๆ
-        alert('❌ ไม่สามารถบันทึกข้อมูลได้:\n\n' + error.message); 
-        
-        btn.disabled = false;
-        btn.innerHTML = 'ลองใหม่อีกครั้ง';
-        
-        // รีเซ็ต CAPTCHA ให้ผู้ใช้กดใหม่เมื่อเกิดข้อผิดพลาด
-        if (typeof turnstile !== 'undefined') turnstile.reset(); 
-    }
-});
+    });
 </script>
 
 </body>
