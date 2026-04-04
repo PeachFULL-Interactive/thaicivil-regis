@@ -521,7 +521,7 @@
     // ==========================================
     // 1. ตั้งค่า URL และประกาศตัวแปร
     // ==========================================
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbw-1Uwl2p7_L8crKHH5WQbEpzZTN_097C7JppxCujk4ZS10uHs8ezlepdkqjNFJWMUK/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxeOmudzBL_Mqge2dtsU9PSIzyZhTn64_qBxTIZs7qZcwJMRdslFFaqgL1qHFK5573C/exec'; 
 
     // เชื่อมต่อตัวแปรกับ ID ในหน้า HTML
     const form = document.getElementById('regForm');
@@ -578,7 +578,7 @@
             }
 
             // --- ด่านที่ 2: แนบรหัสผ่านลับ ---
-            formData.append('0x4AAAAAAC0krUH8kzLKUjiAShDS-n0O_Qg', 'ThaiNBCpressLove3PunPun2565'); 
+            formData.append('secret_key', 'ThaiNBCpressLove3PunPun2565'); 
 
             // --- ด่านที่ 3: ส่งข้อมูลไป Google Apps Script ---
             const response = await fetch(scriptURL, { 
