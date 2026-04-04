@@ -12,10 +12,8 @@
 
     <style>
         body {
-            /* เปลี่ยนจาก Sarabun เป็น Google Sans ความหนา 400 */
             font-family: 'Google Sans', sans-serif;
             font-weight: 400;
-            /* เพิ่มพื้นหลังของเว็บไซต์ */
             background-image: url('https://cdn.discordapp.com/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69cef1ac&is=69cda02c&hm=54ac2b0fac31a7be509c93ba00d6cb0b76914470fd9638b0ff9d38fbd4cc7261&');
             background-size: cover;
             background-position: center;
@@ -34,7 +32,6 @@
 
         /* --- ส่วน Top Bar --- */
         .top-bar {
-            /* ลบ background-image ออก และใส่สีโปร่งแสงพร้อมเบลอ */
             background-color: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -57,7 +54,6 @@
             gap: 15px; 
         }
 
-        /* ข้อความใหม่บน Top Bar แบบ Gradient */
         .top-bar-text {
             font-family: 'Anakotmai', sans-serif;
             font-size: 20px;
@@ -74,7 +70,7 @@
         }
 
         .top-bar .help-link {
-            color: #124892; /* เปลี่ยนสีให้อ่านง่ายบนพื้นหลังสว่าง/เบลอ */
+            color: #124892;
             text-decoration: none;
             font-size: 15px;
             font-weight: 600;
@@ -88,10 +84,62 @@
             color: #032057;
         }
 
+        /* --- ส่วนภาพหน้าปก (Hero Cover) 16:9 --- */
+        .hero-cover {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* กำหนดสัดส่วน 16:9 */
+            margin-top: 100px; /* ดันลงมาให้พ้น Top Bar */
+            background-image: url('https://raw.githubusercontent.com/PeachFULL-Interactive/thaicivil-regis/refs/heads/main/20260404_135634.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* ปุ่มเลื่อนลง */
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 5%; /* ขยับจากขอบล่างของภาพ */
+            color: #ffffff;
+            font-size: 30px; /* ปรับขนาดไอคอนลงเล็กน้อยให้เหมาะกับทุกหน้าจอ */
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.4);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s infinite;
+            transition: background 0.3s, transform 0.3s;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .scroll-down-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
         /* ส่วนหัวของฟอร์ม */
+        #registration-section {
+            scroll-margin-top: 120px; 
+        }
+
         .page-header {
             text-align: center;
-            margin-top: 150px;
+            margin-top: 60px;
             margin-bottom: 30px;
             color: #123456;
         }
@@ -178,14 +226,14 @@
             background: linear-gradient(90deg, rgba(18,72,146,1) 0%, rgba(3,32,87,1) 100%);
             color: white;
             border: none;
-            border-radius: 24px; /* ปรับมุมโค้งตามความต้องการ */
+            border-radius: 24px;
             padding: 10px 35px;
             font-size: 15px;
             font-weight: 500;
             transition: 0.3s;
         }
         .btn-submit:hover {
-            opacity: 0.85; /* ใช้ Opacity แทนการเปลี่ยนสีพื้นหลัง เพื่อรักษา Gradient */
+            opacity: 0.85; 
             color: white;
         }
         .btn-cancel {
@@ -223,6 +271,10 @@
             .top-bar {
                 padding: 0 20px;
             }
+            /* บนหน้าจอเล็ก ปรับระยะปุ่มและหน้าปกนิดหน่อย */
+            .scroll-down-btn {
+                bottom: 15px;
+            }
         }
     </style>
 </head>
@@ -239,7 +291,13 @@
     </a>
 </div>
 
-<div class="container">
+<div class="hero-cover">
+    <a href="#registration-section" class="scroll-down-btn" title="เลื่อนลงเพื่อลงทะเบียน">
+        <i class="fa fa-angle-down"></i>
+    </a>
+</div>
+
+<div class="container" id="registration-section">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-md-11">
             
@@ -373,13 +431,12 @@
     const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
 
     form.addEventListener('submit', e => {
-        e.preventDefault(); // ป้องกันการส่งแบบฟอร์มทันที
-        confirmModal.show(); // แสดงป๊อปอัพยืนยัน
+        e.preventDefault(); 
+        confirmModal.show(); 
     });
 
-    // เมื่อกดยืนยันในป๊อปอัพ ให้ทำงานต่อ
     confirmSubmitBtn.addEventListener('click', () => {
-        confirmModal.hide(); // ซ่อนป๊อปอัพ
+        confirmModal.hide(); 
 
         btn.disabled = true;
         btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังบันทึกข้อมูล...';
