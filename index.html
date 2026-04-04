@@ -84,12 +84,15 @@
             color: #032057;
         }
 
-        /* --- ส่วนภาพหน้าปก (Hero Cover) 16:9 --- */
+        /* --- ส่วนภาพหน้าปก (Hero Cover) --- */
         .hero-cover {
             width: 100%;
-            aspect-ratio: 16 / 9; /* กำหนดสัดส่วน 16:9 */
-            margin-top: 100px; /* ดันลงมาให้พ้น Top Bar */
-            background-image: url('https://raw.githubusercontent.com/PeachFULL-Interactive/thaicivil-regis/refs/heads/main/20260404_135634.jpg');
+            max-width: 2898px; /* ป้องกันไม่ให้ภาพขยายเกินขนาดจริงบนหน้าจอที่กว้างมากๆ */
+            aspect-ratio: 2898 / 906; /* กำหนดสัดส่วนตามขนาดภาพจริง */
+            margin-top: 130px; /* ดันลงมาให้พ้น Top Bar และเว้นระยะห่าง */
+            margin-left: auto;
+            margin-right: auto;
+            background-image: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/20260404_153941.jpg?raw=true');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -103,9 +106,9 @@
         /* ปุ่มเลื่อนลง */
         .scroll-down-btn {
             position: absolute;
-            bottom: 5%; /* ขยับจากขอบล่างของภาพ */
+            bottom: 5%; 
             color: #ffffff;
-            font-size: 30px; /* ปรับขนาดไอคอนลงเล็กน้อยให้เหมาะกับทุกหน้าจอ */
+            font-size: 30px; 
             text-decoration: none;
             background: rgba(0, 0, 0, 0.4);
             width: 50px;
@@ -271,9 +274,11 @@
             .top-bar {
                 padding: 0 20px;
             }
-            /* บนหน้าจอเล็ก ปรับระยะปุ่มและหน้าปกนิดหน่อย */
             .scroll-down-btn {
                 bottom: 15px;
+            }
+            .hero-cover {
+                margin-top: 115px; /* ปรับระยะบนมือถือ */
             }
         }
     </style>
