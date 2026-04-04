@@ -502,7 +502,7 @@
     // ==========================================
     // 1. ตั้งค่า URL และประกาศตัวแปร
     // ==========================================
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzU3NpjW7jrishOMZb52X4hFriHfYSjD4xfncb0A2sZU-J-BFjicmuojqJFmE5rQujD/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw-1Uwl2p7_L8crKHH5WQbEpzZTN_097C7JppxCujk4ZS10uHs8ezlepdkqjNFJWMUK/exec'; 
 
     // เชื่อมต่อตัวแปรกับ ID ในหน้า HTML
     const form = document.getElementById('regForm');
@@ -589,7 +589,7 @@
 
         } catch (error) {
             // หากเกิดข้อผิดพลาด (เช่น ชื่อซ้ำ, ลิงก์โรบล็อกผิด)
-            alert('❌ ไม่สามารถบันทึกข้อมูลได้:\n\n' + error.message); 
+            alert('ขออภัย ❌ ไม่สามารถบันทึกข้อมูลได้:\n\n' + error.message); 
             
             btn.disabled = false;
             btn.innerHTML = 'ลงทะเบียน';
