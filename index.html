@@ -521,7 +521,7 @@
     // ==========================================
     // 1. ตั้งค่า URL และประกาศตัวแปร
     // ==========================================
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxeOmudzBL_Mqge2dtsU9PSIzyZhTn64_qBxTIZs7qZcwJMRdslFFaqgL1qHFK5573C/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbw3KuSorFrJAgMvMtiqoX9j6fVvf47CNjnxFRbP0yoZlAuXBGZXW3-s4d6LDVpAXpbm/exec'; 
 
     // เชื่อมต่อตัวแปรกับ ID ในหน้า HTML
     const form = document.getElementById('regForm');
@@ -542,6 +542,7 @@
         confirmModal.show(); // เปิดหน้าต่างประกาศข้อกำหนด
     });
 
+    
     // ==========================================
     // 3. ฟังก์ชันสำหรับ Turnstile CAPTCHA (ปลดล็อกปุ่มเมื่อติ๊กถูก)
     // ==========================================
@@ -557,7 +558,7 @@
         confirmModal.hide(); // ปิดหน้าต่างยืนยัน
         
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังตรวจสอบและบันทึกข้อมูล...';
+        btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> ระบบกำลังตรวจสอบและบันทึกข้อมูล...';
 
         try {
             let formData = new FormData(form);
@@ -577,8 +578,8 @@
                 formData.append('cf-turnstile-response', turnstileResponse);
             }
 
-            // --- ด่านที่ 2: แนบรหัสผ่านลับ ---
-            formData.append('secret_key', 'ThaiNBCpressLove3PunPun2565'); 
+            // ✅ --- ด่านที่ 2: แนบข้อมูล Origin เพื่อความปลอดภัย (Origin Verification) ---
+            formData.append('request_origin', window.location.origin); 
 
             // --- ด่านที่ 3: ส่งข้อมูลไป Google Apps Script ---
             const response = await fetch(scriptURL, { 
