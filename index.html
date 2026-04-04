@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/Anakotmai/Anakotmai.css" rel="stylesheet" />
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <style>
         /* --- ตั้งค่าเริ่มต้น --- */
@@ -276,14 +278,13 @@
             margin-top: 20px;
         }
         
-        /* --- เพิ่ม CSS ปุ่มลงทะเบียนตามที่ขอมา --- */
         .btn-submit {
             background: linear-gradient(125deg, #003366, #003366, #003366, #0066cc, #003366, #003366, #003366);
             background-size: 300% 300%;
             animation: flashColor2 3s infinite;
             color: white;
             border: none;
-            border-radius: 15px 0 15px 0; /* ปรับขอบให้โค้งบนซ้ายและล่างขวาเหมือนในรูป */
+            border-radius: 15px 0 15px 0;
             padding: 10px 35px;
             font-size: 15px;
             font-weight: 500;
@@ -295,19 +296,17 @@
             transform: scale(1.02);
         }
 
-        /* คุมให้แอนิเมชันสีทำงาน */
         @keyframes flashColor2 {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* --- เพิ่ม CSS ปุ่มยกเลิก (ล้างข้อมูล) --- */
         .btn-cancel {
             background-color: rgba(206, 212, 218, 0.8);
             color: #495057;
             border: none;
-            border-radius: 15px 0 15px 0; /* ขอบแบบเดียวกับปุ่มลงทะเบียน */
+            border-radius: 15px 0 15px 0;
             padding: 10px 35px;
             font-size: 15px;
             font-weight: 500;
@@ -464,27 +463,32 @@
                 
                 <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Google Sans', sans-serif; font-weight: 400;">
     
-    <div style="text-align: center; margin-bottom: 15px;">
-        <img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;">
-    </div>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;">
+                    </div>
 
-    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
-    
-    <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านบางส่วนในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
-    
-    <div style="margin-bottom: 0;">ทั้งนี้ ข้าพเจ้าได้ดำเนินการส่งคำขอเข้ากลุ่มบน 
-        <a href="https://www.roblox.com/communities/8278523/TH-Kingdom-of-Thailand#!/about" target="_blank" style="color: #2b74c2; text-decoration: none; font-weight: 600; transition: 0.3s;">
-            Roblox <i class="fa fa-external-link" style="font-size: 13px; margin-left: 2px;"></i>
-        </a> 
-        เป็นที่เรียบร้อยแล้ว
-</div>
-</div>
+                    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
+                    
+                    <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านบางส่วนในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
+                    
+                    <div style="margin-bottom: 0;">ทั้งนี้ ข้าพเจ้าได้ดำเนินการส่งคำขอเข้ากลุ่มบน 
+                        <a href="https://www.roblox.com/communities/8278523/TH-Kingdom-of-Thailand#!/about" target="_blank" style="color: #2b74c2; text-decoration: none; font-weight: 600; transition: 0.3s;">
+                            Roblox <i class="fa fa-external-link" style="font-size: 13px; margin-left: 2px;"></i>
+                        </a> 
+                        เป็นที่เรียบร้อยแล้ว
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-center">
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAAC0krbVKIeXOVmOX" data-callback="enableSubmitBtn"></div>
+                </div>
+
             </div>
             <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding: 15px 25px;">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="background-color: #f66d6d; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;">
                     <i class="fa fa-times-circle" style="margin-right: 5px;"></i> ปิด
                 </button>
-                <button type="button" class="btn btn-success" id="confirmSubmitBtn" style="background-color: #2b74c2; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;">
+                <button type="button" class="btn btn-success" id="confirmSubmitBtn" style="background-color: #2b74c2; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;" disabled>
                     <i class="fa fa-check-circle" style="margin-right: 5px;"></i> ยืนยันส่งข้อมูล
                 </button>
             </div>
@@ -501,12 +505,26 @@
     const btn = document.getElementById("submitBtn");
     
     // ตั้งค่าตัวแปร Modal
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const confirmModalEl = document.getElementById('confirmModal');
+    const confirmModal = new bootstrap.Modal(confirmModalEl);
     const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
 
     form.addEventListener('submit', e => {
         e.preventDefault(); 
         confirmModal.show(); 
+    });
+
+    // ฟังก์ชันเปิดให้กดปุ่มได้เมื่อผ่าน Turnstile
+    window.enableSubmitBtn = function(token) {
+        confirmSubmitBtn.disabled = false;
+    };
+
+    // รีเซ็ต Turnstile และล็อคปุ่มกลับเหมือนเดิมถ้าหากผู้ใช้ปิด Modal ไปโดยยังไม่กดยืนยัน
+    confirmModalEl.addEventListener('hidden.bs.modal', function () {
+        confirmSubmitBtn.disabled = true;
+        if (typeof turnstile !== 'undefined') {
+            turnstile.reset();
+        }
     });
 
     confirmSubmitBtn.addEventListener('click', () => {
@@ -515,9 +533,15 @@
         btn.disabled = true;
         btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังบันทึกข้อมูล...';
 
+        // นำข้อมูลฟอร์ม และเพิ่มข้อมูล response ของ Turnstile (หาก API หลังบ้านต้องการเช็ค)
+        let formData = new FormData(form);
+        if (typeof turnstile !== 'undefined') {
+            formData.append('cf-turnstile-response', turnstile.getResponse());
+        }
+
         fetch(scriptURL, { 
             method: 'POST', 
-            body: new FormData(form)
+            body: formData
         })
         .then(response => {
             console.log('Success!', response);
