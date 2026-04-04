@@ -496,6 +496,25 @@
     </div>
 </div>
 
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+            <div class="modal-header" style="background-color: #fee2e2; border-bottom: 1px solid #fca5a5; padding: 15px 25px; border-radius: 10px 10px 0 0;">
+                <h5 class="modal-title" id="errorModalLabel" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #991b1b;">
+                    <i class="fa fa-exclamation-triangle" style="margin-right: 8px;"></i> พบข้อผิดพลาด
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 25px; text-align: center;">
+                <p id="errorMessage" style="font-size: 16px; color: #374151; margin-bottom: 0; white-space: pre-line; font-weight: 500;"></p>
+            </div>
+            <div class="modal-footer" style="border-top: none; padding: 10px 25px 20px; justify-content: center;">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 8px; padding: 8px 30px; font-weight: 500;">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
@@ -510,11 +529,13 @@
     const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
     const demo = document.getElementById('demo');
 
-    // เรียกใช้งาน Bootstrap Modal เพื่อให้เปิด/ปิดผ่านโค้ดได้
+    // เรียกใช้งาน Bootstrap Modal ทั้ง 2 ตัว
     const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    const errorMessageText = document.getElementById('errorMessage'); 
 
     // ==========================================
-    // 2. ดักจับการกดปุ่ม "ลงทะเบียน" ในหน้าแรก (เพื่อเปิด Modal)
+    // 2. ดักจับการกดปุ่ม "ลงทะเบียน" ในหน้าแรก (เพื่อเปิด Modal ยืนยัน)
     // ==========================================
     form.addEventListener('submit', (e) => {
         e.preventDefault(); // ป้องกันไม่ให้หน้าเว็บรีเฟรชเอง
@@ -533,10 +554,8 @@
     // ==========================================
     confirmSubmitBtn.addEventListener('click', async () => {
         
-        // 1. ปิดหน้าต่าง Modal
-        confirmModal.hide(); 
+        confirmModal.hide(); // ปิดหน้าต่างยืนยัน
         
-        // 2. เปลี่ยนข้อความปุ่มลงทะเบียนเป็นไอคอนโหลด
         btn.disabled = true;
         btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> กำลังตรวจสอบและบันทึกข้อมูล...';
 
@@ -547,7 +566,10 @@
             if (typeof turnstile !== 'undefined') {
                 const turnstileResponse = turnstile.getResponse();
                 if (!turnstileResponse) {
-                    alert('❌ กรุณายืนยันตัวตนว่าคุณไม่ใช่บอท');
+                    // โชว์ Pop-up Error แทน alert
+                    errorMessageText.innerText = '❌ กรุณายืนยันตัวตนว่าคุณไม่ใช่บอท\n(ติ๊กถูกที่ CAPTCHA ก่อนกดยืนยัน)';
+                    errorModal.show();
+                    
                     btn.disabled = false;
                     btn.innerHTML = 'ลงทะเบียน';
                     return; 
@@ -571,9 +593,8 @@
                 demo.style.display = 'block'; // แสดงข้อความสำเร็จ
                 form.reset(); // ล้างข้อมูล
                 
-                // รีเซ็ต CAPTCHA และล็อกปุ่มยืนยันกลับคืน
-                if (typeof turnstile !== 'undefined') turnstile.reset(); 
-                confirmSubmitBtn.disabled = true; 
+                if (typeof turnstile !== 'undefined') turnstile.reset(); // รีเซ็ต CAPTCHA
+                confirmSubmitBtn.disabled = true; // ล็อกปุ่มยืนยัน
                 
                 btn.disabled = false;
                 btn.innerHTML = 'ลงทะเบียนสำเร็จ';
@@ -588,15 +609,15 @@
             }
 
         } catch (error) {
-            // หากเกิดข้อผิดพลาด (เช่น ชื่อซ้ำ, ลิงก์โรบล็อกผิด)
-            alert('ขออภัย ❌ ไม่สามารถบันทึกข้อมูลได้:\n\n' + error.message); 
+            // หากเกิดข้อผิดพลาด ให้โชว์ Pop-up Error แทน alert
+            errorMessageText.innerText = error.message; 
+            errorModal.show();
             
             btn.disabled = false;
             btn.innerHTML = 'ลงทะเบียน';
             
-            // รีเซ็ต CAPTCHA และล็อกปุ่มยืนยันกลับคืนเพื่อให้กดยืนยันตัวตนใหม่
-            if (typeof turnstile !== 'undefined') turnstile.reset(); 
-            confirmSubmitBtn.disabled = true; 
+            if (typeof turnstile !== 'undefined') turnstile.reset(); // รีเซ็ต CAPTCHA ให้กดใหม่
+            confirmSubmitBtn.disabled = true; // ล็อกปุ่มยืนยันให้กดใหม่
         }
     });
 </script>
