@@ -14,332 +14,72 @@
 
     <style>
         /* --- ตั้งค่าเริ่มต้น --- */
-        body {
-            font-family: 'Google Sans', sans-serif;
-            font-weight: 400;
-            margin: 0;
-            padding: 0;
-            background-color: #f6f6f6;
-        }
-        
-        h2, h5, bu, p {
-            font-family: 'Anakotmai', sans-serif;
-        }
-        h2 { color: #374151; }
-        h5, bu { color: #000000; }
-        p { font-weight: 500; color: #374151; }
+        body { font-family: 'Google Sans', sans-serif; font-weight: 400; margin: 0; padding: 0; background-color: #f6f6f6; }
+        h2, h5, bu, p { font-family: 'Anakotmai', sans-serif; }
+        h2 { color: #374151; } h5, bu { color: #000000; } p { font-weight: 500; color: #374151; }
 
         /* --- ส่วน Top Bar --- */
         .top-bar {
-            background-color: rgba(255, 255, 255, 0.8);
-            background-image: none !important;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            height: 100px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 12%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            height: 100px; width: 100%; position: fixed; top: 0; left: 0; display: flex; justify-content: space-between;
+            align-items: center; padding: 0 12%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000;
         }
+        .top-bar-left { display: flex; align-items: center; gap: 15px; }
+        .top-bar-left .logo-container img { height: 60px; width: auto; }
+        .top-bar .help-link { color: #124892; text-decoration: none; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .top-bar .help-link:hover { color: #032057; }
 
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 15px; 
-        }
-
-        .top-bar-text {
-            font-family: 'Anakotmai', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(90deg, rgba(18,72,146,1) 0%, rgba(3,32,87,1) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .top-bar-left .logo-container img {
-            height: 60px;
-            width: auto;
-        }
-
-        .top-bar .help-link {
-            color: #124892;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s;
-        }
-
-        .top-bar .help-link:hover {
-            color: #032057;
-        }
-
-        /* =========================================
-           Section 1: ส่วนภาพหน้าปก (Hero Banner) 
-           ========================================= */
-        .section-hero-wrapper {
-            background-color: #ffffff; 
-            width: 100%;
-            padding-top: 100px; 
-            padding-bottom: 60px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
+        /* --- Section 1: Hero Banner --- */
+        .section-hero-wrapper { background-color: #ffffff; width: 100%; padding-top: 100px; padding-bottom: 60px; display: flex; justify-content: center; align-items: center; }
         .hero-cover {
-            width: 100%;
-            max-width: 2898px;
-            aspect-ratio: 2898 / 906; 
+            width: 100%; max-width: 2898px; aspect-ratio: 2898 / 906; 
             background-image: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/20260404_164548.jpg?raw=true');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; align-items: flex-end; justify-content: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        /* --- Scroll Down Chevron Animation --- */
-        .scroll-down-link {
-            position: absolute;
-            bottom: 60px;
-            text-decoration: none;
-            z-index: 10;
-        }
+        .scroll-down-link { position: absolute; bottom: 60px; text-decoration: none; z-index: 10; }
+        .chevron-container { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; position: relative; }
+        .chevron { position: absolute; width: 28px; height: 8px; opacity: 0; transform: scale3d(0.5, 0.5, 0.5); animation: move-chevron 3s ease-out infinite; }
+        .chevron:first-child { animation: move-chevron 3s ease-out 1s infinite; }
+        .chevron:nth-child(2) { animation: move-chevron 3s ease-out 2s infinite; }
+        .chevron:before, .chevron:after { content: ''; position: absolute; top: 0; height: 100%; width: 51%; background: #ffffff; border-radius: 2px; }
+        .chevron:before { left: 0; transform: skewY(30deg); } .chevron:after { right: 0; width: 50%; transform: skewY(-30deg); }
+        @keyframes move-chevron { 25% { opacity: 1; } 33.3% { opacity: 1; transform: translateY(15px); } 66.6% { opacity: 1; transform: translateY(25px); } 100% { opacity: 0; transform: translateY(40px) scale(0.5); } }
 
-        .chevron-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            position: relative;
-        }
-
-        .chevron {
-            position: absolute;
-            width: 28px;
-            height: 8px;
-            opacity: 0;
-            transform: scale3d(0.5, 0.5, 0.5);
-            animation: move-chevron 3s ease-out infinite;
-        }
-
-        .chevron:first-child {
-            animation: move-chevron 3s ease-out 1s infinite;
-        }
-
-        .chevron:nth-child(2) {
-            animation: move-chevron 3s ease-out 2s infinite;
-        }
-
-        .chevron:before,
-        .chevron:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 51%;
-            background: #ffffff;
-            border-radius: 2px;
-        }
-
-        .chevron:before {
-            left: 0;
-            transform: skewY(30deg);
-        }
-
-        .chevron:after {
-            right: 0;
-            width: 50%;
-            transform: skewY(-30deg);
-        }
-
-        @keyframes move-chevron {
-            25% { opacity: 1; }
-            33.3% { opacity: 1; transform: translateY(15px); }
-            66.6% { opacity: 1; transform: translateY(25px); }
-            100% { opacity: 0; transform: translateY(40px) scale(0.5); }
-        }
-
-        /* =========================================
-           Section 2: ส่วนของ Interface ฟอร์มกรอกข้อมูล
-           ========================================= */
+        /* --- Section 2: Form --- */
         .section-form-wrapper {
             background-image: url('https://media.discordapp.net/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69d194ac&is=69d0432c&hm=4c7becacdfa3cd39d39a971ecca0ed865c42d7101542ecb8872945efeda46996&=&format=webp&width=1872&height=695');
-            background-size: cover;
-            background-position: center top;
-            background-repeat: no-repeat;
-            width: 100%;
-            min-height: 100vh;
-            padding-top: 50px;
-            padding-bottom: 80px;
+            background-size: cover; background-position: center top; background-repeat: no-repeat; width: 100%; min-height: 100vh; padding-top: 50px; padding-bottom: 80px;
         }
+        .page-header { text-align: center; margin-bottom: 30px; color: #123456; }
+        .page-header h2 { font-weight: 700; margin-bottom: 5px; font-size: 28px; }
+        .page-header p { font-weight: 400; color: #4a6178; font-size: 16px; }
 
-        #overview {
-            scroll-margin-top: 120px; 
-        }
+        .main-card { background-color: transparent; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 50px; border: 1px solid rgba(255, 255, 255, 0.6); }
+        .form-section { padding: 40px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-right: 1px solid rgba(255, 255, 255, 0.4); }
+        .steps-section { padding: 40px 30px; background-color: rgba(255, 255, 255, 0.95); }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #123456;
-        }
-        .page-header h2 {
-            font-weight: 700;
-            margin-bottom: 5px;
-            font-size: 28px;
-        }
-        .page-header p {
-            font-weight: 400;
-            color: #4a6178;
-            font-size: 16px;
-        }
+        .step-item { font-size: 15px; margin-bottom: 15px; color: #5c7792; }
+        .step-item.active { color: #123456; font-weight: 600; }
+        .step-title { font-size: 18px; font-weight: 700; color: #1a2b3c; margin-bottom: 25px; }
 
-        .main-card {
-            background-color: transparent; 
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-            margin-bottom: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
+        label { font-weight: 500; font-size: 14px; margin-bottom: 8px; color: #2c3e50; }
+        .form-control, .form-select { border-radius: 8px; padding: 10px 15px; border: 1px solid rgba(194, 209, 224, 0.8); background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(4px); font-size: 15px; transition: all 0.3s; }
+        .form-control:focus, .form-select:focus { border-color: #2b74c2; box-shadow: 0 0 0 0.2rem rgba(43, 116, 194, 0.25); background-color: #ffffff; }
 
-        .form-section {
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            border-right: 1px solid rgba(255, 255, 255, 0.4);
-        }
+        .btn-actions { display: flex; gap: 15px; margin-top: 20px; }
+        .btn-submit { background: linear-gradient(125deg, #003366, #003366, #003366, #0066cc, #003366, #003366, #003366); background-size: 300% 300%; animation: flashColor2 3s infinite; color: white; border: none; border-radius: 15px 0 15px 0; padding: 10px 35px; font-size: 15px; font-weight: 500; transition: 0.3s, transform 0.2s; }
+        .btn-submit:hover { opacity: 0.9; color: white; transform: scale(1.02); }
+        @keyframes flashColor2 { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .btn-cancel { background-color: rgba(206, 212, 218, 0.8); color: #495057; border: none; border-radius: 15px 0 15px 0; padding: 10px 35px; font-size: 15px; font-weight: 500; transition: 0.3s; }
+        .btn-cancel:hover { background-color: #b1b8be; color: #212529; }
 
-        .steps-section {
-            padding: 40px 30px;
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-
-        .step-item {
-            font-size: 15px;
-            margin-bottom: 15px;
-            color: #5c7792;
-        }
-        .step-item.active {
-            color: #123456;
-            font-weight: 600;
-        }
-
-        .step-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1a2b3c;
-            margin-bottom: 25px;
-        }
-
-        label {
-            font-weight: 500;
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
-
-        .form-control, .form-select {
-            border-radius: 8px;
-            padding: 10px 15px;
-            border: 1px solid rgba(194, 209, 224, 0.8);
-            background-color: rgba(255, 255, 255, 0.6);
-            background-image: none !important;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: #2b74c2;
-            box-shadow: 0 0 0 0.2rem rgba(43, 116, 194, 0.25);
-            background-color: #ffffff;
-        }
-
-        .btn-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .btn-submit {
-            background: linear-gradient(125deg, #003366, #003366, #003366, #0066cc, #003366, #003366, #003366);
-            background-size: 300% 300%;
-            animation: flashColor2 3s infinite;
-            color: white;
-            border: none;
-            border-radius: 15px 0 15px 0;
-            padding: 10px 35px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: 0.3s, transform 0.2s;
-        }
-        .btn-submit:hover {
-            opacity: 0.9; 
-            color: white;
-            transform: scale(1.02);
-        }
-
-        @keyframes flashColor2 {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .btn-cancel {
-            background-color: rgba(206, 212, 218, 0.8);
-            color: #495057;
-            border: none;
-            border-radius: 15px 0 15px 0;
-            padding: 10px 35px;
-            font-size: 15px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .btn-cancel:hover {
-            background-color: #b1b8be;
-            color: #212529;
-        }
-
-        .alert-custom {
-            display: none;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
+        .alert-custom { display: none; margin-top: 20px; border-radius: 8px; }
 
         @media (max-width: 768px) {
-            .steps-section {
-                border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.4);
-            }
-            .btn-actions {
-                flex-direction: column;
-            }
-            .btn-submit, .btn-cancel {
-                width: 100%;
-            }
-            .top-bar {
-                padding: 0 20px;
-            }
-            .section-hero-wrapper {
-                padding-top: 100px;
-            }
+            .steps-section { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.4); }
+            .btn-actions { flex-direction: column; } .btn-submit, .btn-cancel { width: 100%; }
+            .top-bar { padding: 0 20px; } .section-hero-wrapper { padding-top: 100px; }
         }
     </style>
 </head>
@@ -351,19 +91,13 @@
             <img src="https://media.discordapp.net/attachments/726041621912617000/1489308021363572957/20260402_235803.png?ex=69cff1ae&is=69cea02e&hm=91dea7a213c0f3828640ee9cc8f80f69d28d4d15c69e77727aa4cafc9e3f4bd7&=&format=webp&quality=lossless&width=1872&height=548" alt="REGIS-X">
         </div>
     </div>
-    <a href="https://discord.com/channels/733872255544721459/923986317874982922" class="help-link">
-        <i class="fa fa-question-circle-o"></i> ช่วยเหลือ
-    </a>
+    <a href="https://discord.com/channels/733872255544721459/923986317874982922" class="help-link"><i class="fa fa-question-circle-o"></i> ช่วยเหลือ</a>
 </div>
 
 <section class="section-hero-wrapper">
     <div class="hero-cover">
         <a href="#registration-section" class="scroll-down-link" title="เลื่อนลงเพื่อลงทะเบียน">
-            <div class="chevron-container">
-              <div class="chevron"></div>
-              <div class="chevron"></div>
-              <div class="chevron"></div>
-            </div>
+            <div class="chevron-container"><div class="chevron"></div><div class="chevron"></div><div class="chevron"></div></div>
         </a>
     </div>
 </section>
@@ -372,18 +106,15 @@
     <div class="container" id="registration-section">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-11">
-                
                 <div class="page-header">
                     <h2>ระบบลงทะเบียนประชาชน</h2>
                     <p>PeachFullzZ's Thailand</p>
                 </div>
 
                 <div class="main-card row mx-0 d-flex flex-wrap">
-                    
                     <div class="col-md-8 form-section">
                         <h5 class="step-title">ข้อมูล</h5>
-                        
-                        <form name="ฐานข้อมูลทะเบียนราษฎร" id="regForm">
+                        <form id="regForm">
                             <div class="row g-3">
                                 <div class="col-md-4">
                                     <label for="คำนำหน้า">คำนำหน้า</label>
@@ -394,30 +125,21 @@
                                         <option value="นางสาว">นางสาว</option>
                                     </select>
                                 </div>
-
                                 <div class="col-md-8">
                                     <label for="ชื่อและนามสกุล">ชื่อ - นามสกุล</label>
                                     <input type="text" name="ชื่อและนามสกุล" placeholder="กรอกชื่อ - นามสกุลที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
                                 </div>
-
                                 <div class="col-md-12">
                                     <label for="ศาสนา">ศาสนา</label>
                                     <input type="text" name="ศาสนา" placeholder="กรอกศาสนาที่จะใช้แสดงบทบาทสมมติ" class="form-control" required>
                                 </div>
-
                                 <div class="col-md-12">
                                     <label for="ชื่อผู้ใช้โรบล็อก">ชื่อผู้ใช้โรบล็อกซ์</label>
                                     <input type="text" name="ชื่อผู้ใช้โรบล็อก" placeholder="เช่น @PeachFullzZ" class="form-control" required>
                                 </div>
-
                                 <div class="col-md-12">
                                     <label for="ชื่อผู้ใช้ดิสคอร์ด">ชื่อผู้ใช้ดิสคอร์ด</label>
                                     <input type="text" name="ชื่อผู้ใช้ดิสคอร์ด" placeholder="เช่น peachfullzz" class="form-control" required>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label for="ลิงก์บัญชี">ลิงก์บัญชีโรบล็อก</label>
-                                    <input type="url" name="ลิงก์บัญชี" placeholder="https://www.roblox.com/users/..." class="form-control" required>
                                 </div>
 
                                 <div class="col-12 btn-actions">
@@ -426,7 +148,6 @@
                                 </div>
                             </div>
                         </form>
-
                         <div id="demo" class="alert alert-primary alert-custom text-center" role="alert">
                             <b>ลงทะเบียนเรียบร้อย โปรดรอการติดต่อกลับ</b>
                         </div>
@@ -434,76 +155,49 @@
 
                     <div class="col-md-4 steps-section">
                         <ul class="list-unstyled mb-0">
-                            <bu class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง
-<br>The Bureau of Registration Administration</bu>
-                            <li class="step-item" style="font-size: 12px;">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ
-<br><br>
-อาศัยอำนาจกฎหมายที่เกี่ยวข้อง<br>
-รัฐธรรมนูญแห่งราชอาณาจักรไทย
-<br><br>
-การดำเนินการดังกล่าวเป็นเพียงการแสดงบทบาทสมมติภายในเกม ไม่เกี่ยวข้องกับชีวิตจริง </li>
+                            <bu class="step-item active">สำนักบริหารการทะเบียน กรมการปกครอง<br>The Bureau of Registration Administration</bu>
+                            <li class="step-item" style="font-size: 12px;">ระบบลงทะเบียนประชาชนไทย เป็นระบบคัดกรองผู้ที่มีสัญชาติไทย นำชื่อที่ลงทะเบียนเข้าสู่ระบบ เมื่อได้รับการลงทะเบียน ผู้ขอลงทะเบียนจะได้รับบัตรประชาชนและมีสิทธิเสรีภาพในการใช้ชีวิตตามรัฐธรรมนูญแห่งราชอาณาจักรไทย อย่างเต็มรูปแบบ<br><br>อาศัยอำนาจกฎหมายที่เกี่ยวข้อง<br>รัฐธรรมนูญแห่งราชอาณาจักรไทย<br><br>การดำเนินการดังกล่าวเป็นเพียงการแสดงบทบาทสมมติภายในเกม ไม่เกี่ยวข้องกับชีวิตจริง </li>
                             <li class="step-item">โปรดอย่ากรอกข้อมูลส่วนตัวของผู้ใช้งาน</li>
                         </ul>
                     </div>
-
                 </div> 
             </div>
         </div>
     </div>
 </section>
 
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
             <div class="modal-header" style="border-bottom: 1px solid #dee2e6; padding: 20px 25px;">
-                <h4 class="modal-title" id="confirmModalLabel" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #374151;">ยืนยันการส่งข้อมูล</h4>
+                <h4 class="modal-title" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #374151;">ยืนยันการส่งข้อมูล</h4>
             </div>
             <div class="modal-body" style="padding: 25px;">
                 <h5 style="font-family: 'Anakotmai', Light; color: #000000; margin-bottom: 15px; font-size: 18px;">ประกาศข้อกำหนดการใช้งาน</h5>
-                
-                <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6; font-family: 'Google Sans', sans-serif; font-weight: 400;">
-    
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;">
-                    </div>
-
-                    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น ข้อมูลที่ปรากฏนี้ไม่มีความเกี่ยวข้องกับบุคคลที่มีตัวตนอยู่จริงแต่อย่างใด ซึ่งได้รวมไปถึงข้อมูลส่วนบุคคล ชื่อ นามสกุล หรือสิ่งอื่นใดที่ปรากฏในเว็บไซต์นี้ อันมิใช่การกระทำอาชญากรรมต่อระบบคอมพิวเตอร์</div>
-                    
-                    <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านบางส่วนในการแสดงบทบาทสมมติ และข้อมูลส่วนบุคคลของท่านจะถูกใช้ตามจุดประสงค์ที่ระบุมาข้างต้นเท่านั้น ทั้งจะไม่รับผิดต่อความเสียหายใด ๆ ที่เกิดขึ้น</div>
-                    
-                    <div style="margin-bottom: 0;">ทั้งนี้ ข้าพเจ้าได้ดำเนินการส่งคำขอเข้ากลุ่มบน 
-                        <a href="https://www.roblox.com/communities/8278523/TH-Kingdom-of-Thailand#!/about" target="_blank" style="color: #2b74c2; text-decoration: none; font-weight: 600; transition: 0.3s;">
-                            Roblox <i class="fa fa-external-link" style="font-size: 13px; margin-left: 2px;"></i>
-                        </a> 
-                        เป็นที่เรียบร้อยแล้ว
-                    </div>
+                <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6;">
+                    <div style="text-align: center; margin-bottom: 15px;"><img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;"></div>
+                    <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น...</div>
+                    <div style="margin-bottom: 20px;">โดยทางผู้จัดเก็บข้อมูลมีความจำเป็นที่ต้องใช้ข้อมูลส่วนบุคคลของท่านบางส่วนในการแสดงบทบาทสมมติ...</div>
+                    <div style="margin-bottom: 0;">ทั้งนี้ ข้าพเจ้าได้ดำเนินการส่งคำขอเข้ากลุ่มบน <a href="https://www.roblox.com/communities/8278523/TH-Kingdom-of-Thailand#!/about" target="_blank" style="color: #2b74c2; text-decoration: none; font-weight: 600;">Roblox <i class="fa fa-external-link"></i></a> เป็นที่เรียบร้อยแล้ว</div>
                 </div>
-
                 <div class="mt-4 d-flex justify-content-center">
                     <div class="cf-turnstile" data-sitekey="0x4AAAAAAC0krbVKIeXOVmOX" data-callback="enableSubmitBtn"></div>
                 </div>
-
             </div>
             <div class="modal-footer" style="border-top: 1px solid #dee2e6; padding: 15px 25px;">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="background-color: #f66d6d; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;">
-                    <i class="fa fa-times-circle" style="margin-right: 5px;"></i> ปิด
-                </button>
-                <button type="button" class="btn btn-success" id="confirmSubmitBtn" style="background-color: #2b74c2; border: none; border-radius: 8px; padding: 10px 25px; font-size: 16px;" disabled>
-                    <i class="fa fa-check-circle" style="margin-right: 5px;"></i> ยืนยันส่งข้อมูล
-                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="background-color: #f66d6d; border: none; border-radius: 8px; padding: 10px 25px;"><i class="fa fa-times-circle"></i> ปิด</button>
+                <button type="button" class="btn btn-success" id="confirmSubmitBtn" style="background-color: #2b74c2; border: none; border-radius: 8px; padding: 10px 25px;" disabled><i class="fa fa-check-circle"></i> ยืนยันส่งข้อมูล</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+<div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <div class="modal-content" style="border-radius: 10px; border: none;">
             <div class="modal-header" style="background-color: #fee2e2; border-bottom: 1px solid #fca5a5; padding: 15px 25px; border-radius: 10px 10px 0 0;">
-                <h5 class="modal-title" id="errorModalLabel" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #991b1b;">
-                    <i class="fa fa-exclamation-triangle" style="margin-right: 8px;"></i> พบข้อผิดพลาด
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #991b1b;"><i class="fa fa-exclamation-triangle"></i> พบข้อผิดพลาด</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body" style="padding: 25px; text-align: center;">
                 <p id="errorMessage" style="font-size: 16px; color: #374151; margin-bottom: 0; white-space: pre-line; font-weight: 500;"></p>
@@ -516,112 +210,64 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-    // ==========================================
-    // 1. ตั้งค่า URL และประกาศตัวแปร
-    // ==========================================
     const scriptURL = 'https://script.google.com/macros/s/AKfycbw3KuSorFrJAgMvMtiqoX9j6fVvf47CNjnxFRbP0yoZlAuXBGZXW3-s4d6LDVpAXpbm/exec'; 
 
-    // เชื่อมต่อตัวแปรกับ ID ในหน้า HTML
     const form = document.getElementById('regForm');
     const btn = document.getElementById('submitBtn');
     const confirmSubmitBtn = document.getElementById('confirmSubmitBtn');
     const demo = document.getElementById('demo');
-
-    // เรียกใช้งาน Bootstrap Modal ทั้ง 2 ตัว
     const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
     const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
     const errorMessageText = document.getElementById('errorMessage'); 
 
-    // ==========================================
-    // 2. ดักจับการกดปุ่ม "ลงทะเบียน" ในหน้าแรก (เพื่อเปิด Modal ยืนยัน)
-    // ==========================================
-    form.addEventListener('submit', (e) => {
-        e.preventDefault(); // ป้องกันไม่ให้หน้าเว็บรีเฟรชเอง
-        confirmModal.show(); // เปิดหน้าต่างประกาศข้อกำหนด
-    });
+    form.addEventListener('submit', (e) => { e.preventDefault(); confirmModal.show(); });
+    function enableSubmitBtn() { confirmSubmitBtn.disabled = false; }
 
-    
-    // ==========================================
-    // 3. ฟังก์ชันสำหรับ Turnstile CAPTCHA (ปลดล็อกปุ่มเมื่อติ๊กถูก)
-    // ==========================================
-    function enableSubmitBtn() {
-        confirmSubmitBtn.disabled = false; // ปลดล็อกปุ่ม "ยืนยันส่งข้อมูล"
-    }
-
-    // ==========================================
-    // 4. ระบบส่งข้อมูลจริง เมื่อกดปุ่ม "ยืนยันส่งข้อมูล" ใน Modal
-    // ==========================================
     confirmSubmitBtn.addEventListener('click', async () => {
-        
-        confirmModal.hide(); // ปิดหน้าต่างยืนยัน
-        
+        confirmModal.hide(); 
         btn.disabled = true;
         btn.innerHTML = '<i class="fa fa-spinner fa-spin me-2"></i> ระบบกำลังตรวจสอบและบันทึกข้อมูล...';
 
         try {
             let formData = new FormData(form);
             
-            // --- ด่านที่ 1: ตรวจสอบการกด CAPTCHA ---
+            // --- ด่านที่ 1: ตรวจสอบ CAPTCHA ---
             if (typeof turnstile !== 'undefined') {
                 const turnstileResponse = turnstile.getResponse();
                 if (!turnstileResponse) {
-                    // โชว์ Pop-up Error แทน alert
                     errorMessageText.innerText = '❌ กรุณายืนยันตัวตนว่าคุณไม่ใช่บอท\n(ติ๊กถูกที่ CAPTCHA ก่อนกดยืนยัน)';
                     errorModal.show();
-                    
-                    btn.disabled = false;
-                    btn.innerHTML = 'ลงทะเบียน';
+                    btn.disabled = false; btn.innerHTML = 'ลงทะเบียน';
                     return; 
                 }
                 formData.append('cf-turnstile-response', turnstileResponse);
             }
 
-            // ✅ --- ด่านที่ 2: แนบข้อมูล Origin เพื่อความปลอดภัย (Origin Verification) ---
+            // --- ด่านที่ 2: ดักจับ Origin เพื่อกันยิง API ข้ามโดเมน ---
             formData.append('request_origin', window.location.origin); 
 
-            // --- ด่านที่ 3: ส่งข้อมูลไป Google Apps Script ---
-            const response = await fetch(scriptURL, { 
-                method: 'POST', 
-                body: formData
-            });
-
+            const response = await fetch(scriptURL, { method: 'POST', body: formData });
             const result = await response.json();
 
-            // --- ด่านที่ 4: ตรวจสอบผลลัพธ์ ---
             if (result.result === 'success') {
-                demo.style.display = 'block'; // แสดงข้อความสำเร็จ
-                form.reset(); // ล้างข้อมูล
-                
-                if (typeof turnstile !== 'undefined') turnstile.reset(); // รีเซ็ต CAPTCHA
-                confirmSubmitBtn.disabled = true; // ล็อกปุ่มยืนยัน
-                
-                btn.disabled = false;
-                btn.innerHTML = 'ลงทะเบียนสำเร็จ';
-                
-                setTimeout(() => { 
-                    demo.style.display = 'none';
-                    btn.innerHTML = 'ลงทะเบียน';
-                }, 5000);
-
+                demo.style.display = 'block'; 
+                form.reset(); 
+                if (typeof turnstile !== 'undefined') turnstile.reset(); 
+                confirmSubmitBtn.disabled = true; 
+                btn.disabled = false; btn.innerHTML = 'ลงทะเบียนสำเร็จ';
+                setTimeout(() => { demo.style.display = 'none'; btn.innerHTML = 'ลงทะเบียน'; }, 5000);
             } else {
                 throw new Error(result.error);
             }
-
         } catch (error) {
-            // หากเกิดข้อผิดพลาด ให้โชว์ Pop-up Error แทน alert
             errorMessageText.innerText = error.message; 
             errorModal.show();
-            
-            btn.disabled = false;
-            btn.innerHTML = 'ลงทะเบียน';
-            
-            if (typeof turnstile !== 'undefined') turnstile.reset(); // รีเซ็ต CAPTCHA ให้กดใหม่
-            confirmSubmitBtn.disabled = true; // ล็อกปุ่มยืนยันให้กดใหม่
+            btn.disabled = false; btn.innerHTML = 'ลงทะเบียน';
+            if (typeof turnstile !== 'undefined') turnstile.reset(); 
+            confirmSubmitBtn.disabled = true; 
         }
     });
 </script>
-
 </body>
 </html>
