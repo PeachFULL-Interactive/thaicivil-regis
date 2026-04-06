@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบ Regis-X ลงทะเบียนฐานข้อมูลทะเบียนราษฎร</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/gh/lazywasabi/thai-web-fonts@7/fonts/Anakotmai/Anakotmai.css" rel="stylesheet" />
@@ -13,6 +13,22 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <style>
+        /* --- ตัวแปรอนิเมชันที่คุณต้องการ --- */
+        :root {
+            --animation-primary: all 0.4s cubic-bezier(0.7, 0, 0.2, 1);
+            --animation-navigation-forward: 0.8s cubic-bezier(0.8, 0, 0.1, 1);
+            --animation-navigation-backward: 0.4s cubic-bezier(0.8, 0, 0.1, 1);
+            --animation-navigation-fade: 0.3s ease-in-out;
+        }
+
+        /* --- นำเข้า Font เสาชิงช้า --- */
+        @font-face {
+            font-family: 'SaoChingcha';
+            src: url('https://peachfull-interactive.github.io/thaicivil-regis/SaoChingcha-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         /* --- ตั้งค่าเริ่มต้น --- */
         body { font-family: 'Google Sans', sans-serif; font-weight: 400; margin: 0; padding: 0; background-color: #f6f6f6; }
         h2, h5, bu, p { font-family: 'Anakotmai', sans-serif; }
@@ -30,11 +46,11 @@
         .top-bar .help-link:hover { color: #032057; }
 
         /* --- Section 1: Hero Banner --- */
-        .section-hero-wrapper { background-color: #ffffff; width: 100%; padding-top: 100px; padding-bottom: 60px; display: flex; justify-content: center; align-items: center; }
+        .section-hero-wrapper { background-color: #ffffff; width: 100%; padding-top: 100px; display: flex; justify-content: center; align-items: center; }
         .hero-cover {
             width: 100%; max-width: 2898px; aspect-ratio: 2898 / 906; 
             background-image: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/WelcomeToREGISX.jpg?raw=true');
-            background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; align-items: flex-end; justify-content: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background-size: cover; background-position: center; background-repeat: no-repeat; display: flex; align-items: flex-end; justify-content: center; position: relative; 
         }
 
         .scroll-down-link { position: absolute; bottom: 60px; text-decoration: none; z-index: 10; }
@@ -46,25 +62,150 @@
         .chevron:before { left: 0; transform: skewY(30deg); } .chevron:after { right: 0; width: 50%; transform: skewY(-30deg); }
         @keyframes move-chevron { 25% { opacity: 1; } 33.3% { opacity: 1; transform: translateY(15px); } 66.6% { opacity: 1; transform: translateY(25px); } 100% { opacity: 0; transform: translateY(40px) scale(0.5); } }
 
+        /* --- Section 1.5: Gallery & Service Text --- */
+        .section-gallery-wrapper {
+            background-color: #f6f6f6;
+            padding: 80px 0 80px 0; /* ปรับ padding ด้านล่างให้ดูมีระยะห่างสวยงาม */
+            width: 100%;
+        }
+        
+        /* Animation Fade Down สำหรับ Gallery Card (เลื่อนลง) */
+        @keyframes fadeDown {
+            0% { opacity: 0; transform: translateY(-40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-card {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4 / 4.5;
+            border-radius: 15px;
+            overflow: hidden;
+            background: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/REGIS-X.png?raw=true') center/cover;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            margin: 0; 
+            
+            /* ใช้ตัวแปรอนิเมชันที่คุณให้มาตรงนี้ */
+            transition: var(--animation-primary);
+            opacity: 0; 
+            animation: fadeDown var(--animation-navigation-forward) forwards; /* เปลี่ยนมาใช้ fadeDown */
+        }
+
+        .gallery-card::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            -webkit-mask-image: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
+            mask-image: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+            opacity: 1;
+            overflow: hidden;
+            border-radius: 0 0 15px 15px;
+            z-index: 1;
+        }
+
+        .gallery-content { 
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; 
+            color: white;
+            z-index: 2; 
+            font-family: 'Anakotmai', sans-serif; 
+        }
+        
+        .gallery-title { font-size: 32px; font-weight: bold; line-height: 1.2; margin-bottom: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .gallery-bottom-row { display: flex; justify-content: space-between; align-items: center; }
+        .gallery-date { font-size: 15px; font-weight: 500; opacity: 0.9; }
+        
+        .btn-gallery {
+            background-color: white; color: #333; border: none; border-radius: 20px;
+            padding: 8px 18px; font-weight: bold; text-decoration: none; font-size: 14px;
+            display: inline-flex; align-items: center; gap: 5px; transition: transform 0.2s;
+            font-family: 'Google Sans', sans-serif;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .btn-gallery:hover { transform: scale(1.05); color: #000; }
+
+        /* --- ข้อความด้านขวา --- */
+        @keyframes slideFadeInLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .service-text-wrapper {
+            padding-left: 30px;
+            padding-top: 10px; 
+            text-align: left; 
+            opacity: 0; 
+            animation: slideFadeInLeft var(--animation-navigation-forward) 0.2s forwards; 
+        }
+
+        .service-text {
+            font-family: 'SaoChingcha', sans-serif; 
+            font-size: 2rem; 
+            line-height: 1.3;
+            margin: 0;
+            background: linear-gradient(125deg, #003366, #0066cc, #003366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .service-subtext {
+            font-family: 'Google Sans', sans-serif; 
+            font-weight: 500; 
+            font-size: 14px; 
+            color: #2c3e50; 
+            text-align: left;
+            margin-top: 8px; 
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-gallery-wrapper { padding: 50px 15px 50px 15px; }
+            .service-text-wrapper { padding-left: 0; margin-top: 30px; text-align: left; } 
+            .service-text { font-size: 2rem; }
+            .gallery-card { margin: 0 auto; max-width: 340px; }
+            .gallery-content { padding: 20px; }
+            .gallery-title { font-size: 26px; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-card { max-width: 100%; aspect-ratio: 4 / 4.5; }
+        }
+
         /* --- Section 2: Form --- */
-        .section-form-wrapper {
-            background-image: url('https://media.discordapp.net/attachments/726041621912617000/1489033136343089324/banner.7VOW0Bmk.webp?ex=69d194ac&is=69d0432c&hm=4c7becacdfa3cd39d39a971ecca0ed865c42d7101542ecb8872945efeda46996&=&format=webp&width=1872&height=695');
-            background-size: cover; background-position: center top; background-repeat: no-repeat; width: 100%; min-height: 100vh; padding-top: 50px; padding-bottom: 80px;
+        .section-form-wrapper { 
+            background-color: #FFFFFF; /* เปลี่ยนเป็นสีขาว */
+            width: 100%; 
+            min-height: 100vh; 
+            padding-top: 80px; /* เพิ่มระยะห่างด้านบนให้แบ่งโซนชัดเจน */
+            padding-bottom: 80px; 
         }
         .page-header { text-align: center; margin-bottom: 30px; color: #123456; }
         .page-header h2 { font-weight: 700; margin-bottom: 5px; font-size: 28px; }
         .page-header p { font-weight: 400; color: #4a6178; font-size: 16px; }
 
-        .main-card { background-color: transparent; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 50px; border: 1px solid rgba(255, 255, 255, 0.6); }
-        .form-section { padding: 40px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-right: 1px solid rgba(255, 255, 255, 0.4); }
-        .steps-section { padding: 40px 30px; background-color: rgba(255, 255, 255, 0.95); }
+        .main-card { background-color: #fcfcfc; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 50px; border: 1px solid rgba(0, 0, 0, 0.05); }
+        .form-section { padding: 40px; background-color: #ffffff; border-right: 1px solid rgba(0, 0, 0, 0.05); }
+        .steps-section { padding: 40px 30px; background-color: #fafafa; }
 
         .step-item { font-size: 15px; margin-bottom: 15px; color: #5c7792; }
         .step-item.active { color: #123456; font-weight: 600; }
         .step-title { font-size: 18px; font-weight: 700; color: #1a2b3c; margin-bottom: 25px; }
 
         label { font-weight: 500; font-size: 14px; margin-bottom: 8px; color: #2c3e50; }
-        .form-control, .form-select { border-radius: 8px; padding: 10px 15px; border: 1px solid rgba(194, 209, 224, 0.8); background-color: rgba(255, 255, 255, 0.6); backdrop-filter: blur(4px); font-size: 15px; transition: all 0.3s; }
+        .form-control, .form-select { border-radius: 8px; padding: 10px 15px; border: 1px solid rgba(194, 209, 224, 0.8); background-color: #ffffff; font-size: 15px; transition: all 0.3s; }
         .form-control:focus, .form-select:focus { border-color: #2b74c2; box-shadow: 0 0 0 0.2rem rgba(43, 116, 194, 0.25); background-color: #ffffff; }
 
         .btn-actions { display: flex; gap: 15px; margin-top: 20px; }
@@ -77,7 +218,7 @@
         .alert-custom { display: none; margin-top: 20px; border-radius: 8px; }
 
         @media (max-width: 768px) {
-            .steps-section { border-left: none; border-top: 1px solid rgba(255, 255, 255, 0.4); }
+            .steps-section { border-left: none; border-top: 1px solid rgba(0, 0, 0, 0.05); }
             .btn-actions { flex-direction: column; } .btn-submit, .btn-cancel { width: 100%; }
             .top-bar { padding: 0 20px; } .section-hero-wrapper { padding-top: 100px; }
         }
@@ -102,8 +243,35 @@
     </div>
 </section>
 
-<section class="section-form-wrapper">
-    <div class="container" id="registration-section">
+<section class="section-gallery-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            
+            <div class="col-md-5 d-flex justify-content-center justify-content-md-start">
+                <div class="gallery-card">
+                    <div class="gallery-content">
+                        <div class="gallery-title">กิจกรรม<br>ที่น่าสนใจ</div>
+                        <div class="gallery-bottom-row">
+                            <div class="gallery-date">6 เมษยน 2569</div>
+                            <a href="#" class="btn-gallery">สำรวจ <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7 align-self-start">
+                <div class="service-text-wrapper">
+                    <h1 class="service-text">เราพร้อมให้บริการคุณ</h1>
+                    <div class="service-subtext">สำนักบริหารทะเบียนกลาง กรมการปกครอง พร้อมให้บริการทุกท่าน</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section-form-wrapper" id="registration-section">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-11">
                 <div class="page-header">
@@ -170,10 +338,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
             <div class="modal-header" style="border-bottom: 1px solid #dee2e6; padding: 20px 25px;">
-                <h4 class="modal-title" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #374151;">ยืนยันการส่งข้อมูล</h4>
+                <h4 class="modal-title" style="font-weight: 700; color: #374151;">ยืนยันการส่งข้อมูล</h4>
             </div>
             <div class="modal-body" style="padding: 25px;">
-                <h5 style="font-family: 'Anakotmai', Light; color: #000000; margin-bottom: 15px; font-size: 18px;">ประกาศข้อกำหนดการใช้งาน</h5>
+                <h5 style="color: #000000; margin-bottom: 15px; font-size: 18px;">ประกาศข้อกำหนดการใช้งาน</h5>
                 <div style="background-color: #e5e7eb; border-radius: 8px; padding: 20px; font-size: 16px; color: #000000; line-height: 1.6;">
                     <div style="text-align: center; margin-bottom: 15px;"><img src="https://images.uncyc.org/th/7/71/ICTIseeu.gif" alt="ICT" style="max-width: 100%; border-radius: 5px;"></div>
                     <div style="margin-bottom: 20px;">ระบบลงทะเบียนประชาชนไทยดังกล่าว เป็นการรวบรวมข้อมูลเพื่อใช้ประกอบการแสดงบทบาทสมมติเท่านั้น...</div>
@@ -196,7 +364,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px; border: none;">
             <div class="modal-header" style="background-color: #fee2e2; border-bottom: 1px solid #fca5a5; padding: 15px 25px; border-radius: 10px 10px 0 0;">
-                <h5 class="modal-title" style="font-family: 'Anakotmai', sans-serif; font-weight: 700; color: #991b1b;"><i class="fa fa-exclamation-triangle"></i> พบข้อผิดพลาด</h5>
+                <h5 class="modal-title" style="font-weight: 700; color: #991b1b;"><i class="fa fa-exclamation-triangle"></i> พบข้อผิดพลาด</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body" style="padding: 25px; text-align: center;">
@@ -232,7 +400,6 @@
         try {
             let formData = new FormData(form);
             
-            // --- ด่านที่ 1: ตรวจสอบ CAPTCHA ---
             if (typeof turnstile !== 'undefined') {
                 const turnstileResponse = turnstile.getResponse();
                 if (!turnstileResponse) {
@@ -244,7 +411,6 @@
                 formData.append('cf-turnstile-response', turnstileResponse);
             }
 
-            // --- ด่านที่ 2: ดักจับ Origin เพื่อกันยิง API ข้ามโดเมน ---
             formData.append('request_origin', window.location.origin); 
 
             const response = await fetch(scriptURL, { method: 'POST', body: formData });
