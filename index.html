@@ -238,24 +238,24 @@
             .top-bar { padding: 0 20px; } .section-hero-wrapper { padding-top: 100px; }
         }
 
-            #maintenance-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        background: rgba(0,0,0,0.92);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-  #maintenance-overlay {
+#maintenance-overlay {
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background-image: url('https://github.com/PeachFULL-Interactive/thaicivil-regis/blob/main/20260407_234632.jpg?raw=true');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-      }
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* รองรับ Safari */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #maintenance-overlay img {
+    max-width: 90%;
+    max-height: 90vh;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  }
+      
         
     </style>
 </head>
